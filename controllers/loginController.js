@@ -34,16 +34,7 @@ module.exports={
                         break;
                     case 3:
                         usuario.savedata(datos[0].responsable_usuario,datos[0].responsable_contra,datos[0].responsable_area)
-                        switch(usuario.trimestre){
-                            case 1:
-                                res.redirect('administradores/aprobart1'); break;
-                            case 2:
-                                res.redirect('administradores/aprobart2'); break;
-                            case 3:
-                                res.redirect('administradores/aprobart3'); break;
-                            case 4:
-                                res.redirect('administradores/aprobart4'); break;
-                        }
+                        res.redirect('administradores/aprobar/avance');
                         break;
                 }
             }else{
