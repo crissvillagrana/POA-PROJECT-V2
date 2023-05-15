@@ -1,0 +1,41 @@
+<%- include ../layouts/cabecera.ejs %>
+<div class="card text-black bg-transparent mb-3">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Area</th>
+                        <th>Por revisar</th>
+                        <th>Completadas</th>
+                        <th>Total</th>
+                        <th>Avance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let x = 0;x < avance.length; x++) { %>
+                        <tr>
+                            <td><a href="avance/<%=avance[x].area_id %>"><%=avance[x].area_nombre%></a></td>
+                            <td></td>
+                            <td><%=avance[x].actividades_completadas %></td>
+                            <td><%=avance[x].actividades_registradas %></td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" 
+                                    style="width:<%=(avance[x].actividades_completadas*100)/avance[x].actividades_registradas %>%;" 
+                                    aria-valuenow="20" 
+                                    aria-valuemin="0" 
+                                    aria-valuemax="100"><%= Math.round((avance[x].actividades_completadas * 100)/avance[x].actividades_registradas) %>%</div>
+                                  </div>
+                            </td>
+                            
+                        </tr>
+                        
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<%- include ../layouts/pie %>

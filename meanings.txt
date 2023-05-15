@@ -1,0 +1,5 @@
+status:
+
+0 = propuesta
+1 = asignada
+2 = aprobada

@@ -1,0 +1,383 @@
+<%- include ../../layouts/cabecera.ejs %>
+<div class="card text-black bg-transparent mb-3">
+    <div class="card-header">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" id="searchBar" type="search" placeholder="Buscar..." aria-label="Search">
+                </form>   
+    </div>
+    <div class="card text-center">
+        <table class="table table-light table-borderless table-responsive-lg">
+            <thead class="thead-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Eje</th>
+                    <th>Estrategia</th>
+                    <th>Descripción</th>
+                    <th>Área</th>
+                    <th>Responsable</th>
+                    <th>Meta</th>
+                    <th>Indicador</th>
+                    <th>Unidad</th>
+
+                    <th>Trimestre 1</th>
+                    <th><i class="bi bi-folder"></i></th>
+                    <th><i class="bi bi-chat-dots"></i></th>
+
+                    <th>Trimestre 2</th>
+                    <th><i class="bi bi-folder"></i></th>
+                    <th><i class="bi bi-chat-dots"></i></th>
+
+                    <th>Trimestre 3</th>
+                    <th><i class="bi bi-folder"></i></th>
+                    <th><i class="bi bi-chat-dots"></i></th>
+
+                    <th>Trimestre 4</th>
+                    <th><i class="bi bi-folder"></i></th>
+                    <th><i class="bi bi-chat-dots"></i></th>
+
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="tableContent">
+                <% for( let x = 0;x < actividades.length; x++) { %>
+                    <% if(actividades[x].actividad_completada==1){ %>
+                        <tr class="table-success">
+                            <td><%=actividades[x].actividad_id %></td>
+                            <td><%=actividades[x].actividad_eje %></td>
+                            <td><%=actividades[x].actividad_estrategia %></td>
+                            <td><%=actividades[x].actividad_desc %></td>
+                            <td><%=actividades[x].area_nombre %></td>
+                            <td><%=actividades[x].responsable_desc %></td>
+                            <td><%=actividades[x].actividad_meta %></td>
+                            <td><%=actividades[x].actividad_indicador %></td>
+                            <td><%=actividades[x].actividad_unidad %></td>
+
+                            <td><%=actividades[x].actividad_t1 %></td>
+                            <% if(!actividades[x].actividad_evt1){ %>
+                                <td>-</td>
+                            <% } else{ %>
+                                <td>
+                                    <button class="btn btn-light" data-toggle="modal" data-target="#ventanaPDF1<%=x%>">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </td>
+                            <% } %>
+                            <td>
+                                <button class="btn btn-light" data-toggle="modal" data-target="#modalObservacionesT1<%=x%>">
+                                    <i class="bi bi-card-text"></i>
+                                </button>
+                            </td>
+
+                            <td class="table-warning"><%=actividades[x].actividad_t2 %></td>
+                            <% if(!actividades[x].actividad_evt2){ %>
+                                <td class="table-warning">-</td>
+                            <% } else{ %>
+                                <td class="table-warning">
+                                    <button class="btn btn-light" data-toggle="modal" data-target="#ventanaPDF2<%=x%>">
+                                        <i class="bi bi-card-text"></i>
+                                    </button>
+                                </td>
+                            <% } %>
+                            <td class="table-warning">
+                                <button class="btn btn-light" data-toggle="modal" data-target="#modalObservacionesT2<%=x%>">
+                                    <i class="bi bi-card-text"></i>
+                                </button>
+                            </td>
+
+                            <td><%=actividades[x].actividad_t3 %></td>
+                            <% if(!actividades[x].actividad_evt3){ %>
+                                <td>-</td>
+                            <% } else{ %>
+                                <td>
+                                    <button class="btn btn-light" data-toggle="modal" data-target="#ventanaPDF3<%=x%>">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </td>
+                            <% } %>
+                            <td>
+                                <button class="btn btn-light" data-toggle="modal" data-target="#modalObservacionesT3<%=x%>">
+                                    <i class="bi bi-card-text"></i>
+                                </button>
+                            </td>
+
+                            <td><%=actividades[x].actividad_t4 %></td>
+                            <% if(!actividades[x].actividad_evt4){ %>
+                                <td>-</td>
+                            <% } else{ %>
+                                <td>
+                                    <button class="btn btn-light" data-toggle="modal" data-target="#ventanaPDF4<%=x%>">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </td>
+                            <% } %>
+                            <td>
+                                <button class="btn btn-light" data-toggle="modal" data-target="#modalObservacionesT4<%=x%>">
+                                    <i class="bi bi-card-text"></i>
+                                </button>
+                            </td>
+
+                            <td><%=actividades[x].actividad_t1 + actividades[x].actividad_t2 + actividades[x].actividad_t3 + actividades[x].actividad_t4 %></td>
+                        </tr>
+                    <% }else { %>
+                        <tr>
+                            <td><%=actividades[x].actividad_id %></td>
+                            <td><%=actividades[x].actividad_eje %></td>
+                            <td><%=actividades[x].actividad_estrategia %></td>
+                            <td><%=actividades[x].actividad_desc %></td>
+                            <td><%=actividades[x].area_nombre %></td>
+                            <td><%=actividades[x].responsable_desc %></td>
+                            <td><%=actividades[x].actividad_meta %></td>
+                            <td><%=actividades[x].actividad_indicador %></td>
+                            <td><%=actividades[x].actividad_unidad %></td>
+
+                            <td><%=actividades[x].actividad_t1 %></td>
+                            <% if(!actividades[x].actividad_evt1){ %>
+                                <td>-</td>
+                            <% } else{ %>
+                                <td>
+                                    <button class="btn btn-light" data-toggle="modal" data-target="#ventanaPDF1<%=x%>">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </td>
+                            <% } %>
+                            <td>
+                                <button class="btn btn-light" data-toggle="modal" data-target="#modalObservacionesT1<%=x%>">
+                                    <i class="bi bi-card-text"></i>
+                                </button>
+                            </td>
+
+                            <td class="table-warning table-subtle"><%=actividades[x].actividad_t2 %></td>
+                            <% if(!actividades[x].actividad_evt2){ %>
+                                <td class="table-warning">-</td>
+                            <% } else{ %>
+                                <td class="table-warning">
+                                    <button class="btn btn-light" data-toggle="modal" data-target="#ventanaPDF2<%=x%>">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </td>
+                            <% } %>
+                            <td class="table-warning">
+                                <button class="btn btn-light" data-toggle="modal" data-target="#modalObservacionesT2<%=x%>">
+                                    <i class="bi bi-card-text"></i>
+                                </button>
+                            </td>
+
+                            <td><%=actividades[x].actividad_t3 %></td>
+                            <% if(!actividades[x].actividad_evt3){ %>
+                                <td>-</td>
+                            <% } else{ %>
+                                <td>
+                                    <button class="btn btn-light" data-toggle="modal" data-target="#ventanaPDF3<%=x%>">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </td>
+                            <% } %>
+                            <td>
+                                <button class="btn btn-light" data-toggle="modal" data-target="#modalObservacionesT3<%=x%>">
+                                    <i class="bi bi-card-text"></i>
+                                </button>
+                            </td>
+
+                            <td><%=actividades[x].actividad_t4 %></td>
+                            <% if(!actividades[x].actividad_evt4){ %>
+                                <td>-</td>
+                            <% } else{ %>
+                                <td>
+                                    <button class="btn btn-light" data-toggle="modal" data-target="#ventanaPDF4<%=x%>">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </td>
+                            <% } %>
+                            <td>
+                                <button class="btn btn-light" data-toggle="modal" data-target="#modalObservacionesT4<%=x%>">
+                                    <i class="bi bi-card-text"></i>
+                                </button>
+                            </td>
+
+                            <td><%=actividades[x].actividad_t1 + actividades[x].actividad_t2 + actividades[x].actividad_t3 + actividades[x].actividad_t4 %></td>
+                        </tr>
+                    <% } %>
+                    <!--MODAL T1-->
+                    <div class="modal fade" id="ventanaPDF1<%=x%>" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 id="tituloVentana">Evidencia <%= actividades[x].actividad_evt1%></h5>
+                                    <button class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="ExternalFiles">
+                                        <iframe src="/archivos/<%= actividades[x].actividad_evt1%>" width="1000" height="1000"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <!--MODAL T2-->
+                    <div class="modal fade" id="ventanaPDF2<%=x%>" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 id="tituloVentana">Evidencia <%= actividades[x].actividad_evt2%></h5>
+                                    <button class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="ExternalFiles">
+                                        <iframe src="/archivos/<%= actividades[x].actividad_evt2%>" width="1000" height="1000"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <!--MODAL T3-->
+                    <div class="modal fade" id="ventanaPDF3<%=x%>" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 id="tituloVentana">Evidencia <%= actividades[x].actividad_evt3%></h5>
+                                    <button class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="ExternalFiles">
+                                        <iframe src="/archivos/<%= actividades[x].actividad_evt3%>" width="1000" height="1000"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <!--MODAL T4-->
+                    <div class="modal fade" id="ventanaPDF4<%=x%>" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 id="tituloVentana">Evidencia <%= actividades[x].actividad_evt4%></h5>
+                                    <button class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="ExternalFiles">
+                                        <iframe src="/archivos/<%= actividades[x].actividad_evt4%>" width="1000" height="1000"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                   
+                    <!--Modal de Observaciones T1-->
+                    <div class="modal fade" id="modalObservacionesT1<%=x%>" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 id="tituloVentana">Observaciones</h5>
+                                    <button class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="text" id="txtobservacion" name="observaciones"
+                                                            value="<%= actividades[x].actividad_obst1 %>" disabled></input>
+                                                </div>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Modal de Observaciones T2-->
+                    <div class="modal fade" id="modalObservacionesT2<%=x%>" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 id="tituloVentana">Observaciones</h5>
+                                    <button class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="text" id="txtobservacion" name="observaciones"
+                                                            value="<%= actividades[x].actividad_obst2 %>" disabled></input>
+                                                </div>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Modal de Observaciones T3-->
+                    <div class="modal fade" id="modalObservacionesT3<%=x%>" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 id="tituloVentana">Observaciones</h5>
+                                    <button class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="text" id="txtobservacion" name="observaciones"
+                                                            value="<%= actividades[x].actividad_obst3 %> disabled"></input>
+                                                </div>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Modal de Observaciones T4-->
+                    <div class="modal fade" id="modalObservacionesT4<%=x%>" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 id="tituloVentana">Observaciones</h5>
+                                    <button class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="text" id="txtobservacion" name="observaciones"
+                                                            value="<%= actividades[x].actividad_obst4 %> disabled"></input>
+                                                </div>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </tbody>
+               
+        </table>
+    </div>
+            
+</div>
+
+<script>
+$(document).ready(function(){
+  $("#searchBar").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#tableContent tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+<%- include ../../layouts/pie.ejs %>  

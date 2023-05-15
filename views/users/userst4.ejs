@@ -1,0 +1,185 @@
+<%- include ../layouts/cabecerausers.ejs %>
+
+<div class="card-body">
+    <table class="table table-light table-borderless table-responsive-lg">
+        <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Eje</th>
+                <th>Estrategia</th>
+                        <th>Descripción</th>
+                        <th>Meta</th>
+                        <th>Indicador</th>
+                        <th>Unidad de medida</th>
+                        <th>Actividades del Trimestre</th>
+                        <th>Total</th>
+                        <th>Evidencia</th>
+                        <th>Observaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(let x=0;x < actividades.length; x++) { %>
+                <% if(actividades[x].actividad_completada==1){ %>
+                    <tr class="table-success">
+                        <td><%=actividades[x].actividad_id %></td>
+                        <td><%=actividades[x].actividad_eje %></td>
+                        <td><%=actividades[x].actividad_estrategia %></td>
+                        <td><%=actividades[x].actividad_desc %></td>
+                        <td><%=actividades[x].actividad_meta %></td>
+                        <td><%=actividades[x].actividad_indicador %></td>
+                        <td><%=actividades[x].actividad_unidad %></td>
+                        <td><%=actividades[x].actividad_t4 %></td>
+                        <td>
+                            <%=actividades[x].actividad_t1 + actividades[x].actividad_t2 + actividades[x].actividad_t3 + actividades[x].actividad_t4 %>
+                        </td>
+                        <% if(!actividades[x].actividad_evt4){ %>
+                            <td>
+                                <% if(bbutton4){ %>
+                                    <button class="btn btn-light" data-toggle="modal" data-target="#ventanaSubir<%=x%>" disabled>
+                                        <i class="bi bi-upload"></i>
+                                    </button>
+                                <% }else{ %>
+                                    <button class="btn btn-light" data-toggle="modal" data-target="#ventanaSubir<%=x%>">
+                                        <i class="bi bi-upload"></i>
+                                    </button>
+                                <% } %>
+                            </td>
+                        <% } else{ %>
+                            <td>
+                                <button class="btn btn-light" data-toggle="modal" data-target="#ventanaPDF<%=x%>">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </td>
+                        <% } %>
+                    </tr>
+                <% }else{ %>
+                    <tr>
+                        <td><%=actividades[x].actividad_id %></td>
+                        <td><%=actividades[x].actividad_eje %></td>
+                        <td><%=actividades[x].actividad_estrategia %></td>
+                        <td><%=actividades[x].actividad_desc %></td>
+                        <td><%=actividades[x].actividad_meta %></td>
+                        <td><%=actividades[x].actividad_indicador %></td>
+                        <td><%=actividades[x].actividad_unidad %></td>
+                        <td><%=actividades[x].actividad_t4 %></td>
+                        <td>
+                            <%=actividades[x].actividad_t1 + actividades[x].actividad_t2 + actividades[x].actividad_t3 + actividades[x].actividad_t4 %>
+                        </td>
+                        
+                        <% if(!actividades[x].actividad_evt4){ %>
+                            <td>
+                                <% if(bbutton4){ %>
+                                    <button class="btn btn-light" data-toggle="modal" data-target="#ventanaSubir<%=x%>" disabled>
+                                        <i class="bi bi-upload"></i>
+                                    </button>
+                                <% }else{ %>
+                                    <button class="btn btn-light" data-toggle="modal" data-target="#ventanaSubir<%=x%>">
+                                        <i class="bi bi-upload"></i>
+                                    </button>
+                                <% } %>
+                            </td>
+                        <% } else{ %>
+                            <td>
+                                <button class="btn btn-light" data-toggle="modal" data-target="#ventanaPDF<%=x%>">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </td>
+                        <% } %>
+                        <td>
+                            <button class="btn btn-light" data-toggle="modal" data-target="#modalObservaciones<%=x%>">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+
+
+
+                    <!--MODAL SUBIR ARCHIVO-->
+                    <form method="post" action="/users/subirt4" enctype="multipart/form-data">
+                        <div class="modal fade" id="ventanaSubir<%=x%>" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 id="tituloVentana">Subir Evidencia</h5>
+                                        <button class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="alert-success">
+                                            <div class="form-group">
+                                                <label for="my-input">Subir archivo:</label>
+                                                <input id="my-input" class="form-control" type="file" name="archivo"/>
+                                                <input type="hidden" value="<%=actividades[x].actividad_id %>" name="idactividad"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        
+                                            <button class="btn btn-info" type="submit">
+                                                <img src="/images/guardar.png" width="20"> Guardar
+                                            </button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </form>
+    
+                    <!--MODAL VER PDF-->
+                    <div class="modal fade" id="ventanaPDF<%=x%>" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 id="tituloVentana">Evidencia Trimestral</h5>
+                                    <button class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="ExternalFiles">
+                                            <iframe src="/archivos/<%= actividades[x].actividad_evt4%>" width="1000" height="1000"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+    
+                    <!--Modal de Observaciones-->
+                    <div class="modal fade" id="modalObservaciones<%=x%>" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 id="tituloVentana">Agregar Observaciones</h5>
+                                    <button class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            <form method="post" action="/users/observacionest4" enctype="multipart/form-data">
+                                                <div class="form-group">
+                                                    <label for="txtobservacion" class="form-label">Observaciones:</label>
+                                                    <input class="form-control" type="text" id="txtobservacion" name="observaciones"
+                                                            value="<%= actividades[x].actividad_obs %>"></input>
+                                                </div>
+                                                <input type="hidden" name="idactividad" value="<%=actividades[x].actividad_id%>"/>
+                                                <input type="hidden" name="areaid" value="<%=actividades[x].area_id%>"/>
+                                                <button class="btn btn-outline-info" type="submit"><img src="/images/guardar.png" width="20"></button>
+                                            </form>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }//else %>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+
+
+<%- include ../layouts/pie.ejs %>

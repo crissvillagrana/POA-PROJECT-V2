@@ -1,0 +1,37 @@
+<%- include ../layouts/cabeceradmins.ejs %>
+<div class="card">
+    <div class="card text-black bg-transparent mb-3">
+        <div class="card-body">
+            <h6 class="card-title">Avance de actividades completadas</h6>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Area</th>
+                            <th>Completadas</th>
+                            <th>Pendientes</th>
+                            <th>Total</th>
+                            <th>Avance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(let x = 0;x < avance.length; x++) { %>
+                            <tr>
+                                <td><%=avance[x].area_nombre%></td>
+                                <td><%=avance[x].actividades_completadas %></td>
+                                <td><%=avance[x].actividades_registradas - avance[x].actividades_completadas %></td>
+                                <td><%=avance[x].actividades_registradas %></td>
+                                <td>
+                                    <%= Math.round((avance[x].actividades_completadas * 100)/avance[x].actividades_registradas) %>%
+                                </td>
+                                
+                            </tr>
+                        <% } %>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include ../layouts/pie %>

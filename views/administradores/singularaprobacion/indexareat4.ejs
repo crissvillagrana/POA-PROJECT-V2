@@ -1,0 +1,213 @@
+<%- include ../../layouts/cabeceradmins.ejs %>
+<div class="card text-black bg-transparent mb-3">
+    <div class="card-header">
+        <div class="row g-3">
+            <div class="card" style="width: 87rem;">
+                <form class="d-flex" role="search">
+                    <input class="form-control" id="searchBar" type="search" placeholder="Buscar..." aria-label="Search">
+                </form>  
+            </div>
+            <div class="card">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Trimestre
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="t1">Enero - Marzo</a></li>
+                      <li><a class="dropdown-item" href="t2">Abril - Junio</a></li>
+                      <li><a class="dropdown-item" href="t3">Julio - Septiembre</a></li>
+                      <li><a class="dropdown-item active" href="t4">Octubre - Diciembre</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <div class="card text-center">
+        <table class="table table-light table-borderless table-responsive-lg">
+            <thead class="thead-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Eje</th>
+                    <th>Estrategia</th>
+                    <th>Descripción</th>
+                    <th>Área</th>
+                    <th>Responsable</th>
+                    <th>Meta</th>
+                    <th>Indicador</th>
+                    <th>Unidad</th>
+                    <th>Trimestre 4</th>
+                    <th><i class="bi bi-folder"></i></th>
+                    <th><i class="bi bi-chat-dots"></i></th>
+                    <th>Evaluar</th>
+                    
+                </tr>
+            </thead>
+            <tbody id="tableContent">
+                <% for( let x = 0;x < actividades.length; x++) { %>
+                        <tr>
+                            <td><%=actividades[x].actividad_id %></td>
+                            <td><%=actividades[x].actividad_eje %></td>
+                            <td><%=actividades[x].actividad_estrategia %></td>
+                            <td><%=actividades[x].actividad_desc %></td>
+                            <td><%=actividades[x].area_nombre %></td>
+                            <td><%=actividades[x].responsable_desc %></td>
+                            <td><%=actividades[x].actividad_meta %></td>
+                            <td><%=actividades[x].actividad_indicador %></td>
+                            <td><%=actividades[x].actividad_unidad %></td>
+
+                            <td><%=actividades[x].actividad_t4 %></td>
+                            <% if(!actividades[x].actividad_evt4){ %>
+                                <td>-</td>
+                            <% } else{ %>
+                                <td>
+                                    <button class="btn btn-light" data-toggle="modal" data-target="#ventanaPDF4<%=x%>">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </td>
+                            <% } %>
+                            <td>
+                                <button class="btn btn-light" data-toggle="modal" data-target="#modalObservacionesT4<%=x%>">
+                                    <i class="bi bi-card-text"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <% if(actividades[x].actividad_ap4==0){ %>
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#modalAprobar<%=x%>">
+                                        <i class="bi bi-file-earmark-excel-fill"></i>
+                                    </button>
+                                <% }else{ %>
+                                    <button class="btn btn-success" data-toggle="modal" data-target="#modalDesaprobar<%=x%>">
+                                        <i class="bi bi-file-earmark-check-fill"></i>
+                                    </button>
+                                <% } %>
+                            </td>
+                            
+                        </tr>
+                    <!--MODAL T4-->
+                    <div class="modal fade" id="ventanaPDF4<%=x%>" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 id="tituloVentana">Evidencia <%= actividades[x].actividad_evt4%></h5>
+                                    <button class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="ExternalFiles">
+                                        <iframe src="/archivos/<%= actividades[x].actividad_evt4%>" width="1000" height="1000"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <!--Modal de Observaciones T4-->
+                    <div class="modal fade" id="modalObservacionesT4<%=x%>" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 id="tituloVentana">Observaciones</h5>
+                                    <button class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="text" id="txtobservacion" name="observaciones"
+                                                            value="<%= actividades[x].actividad_obst4 %> disabled"></input>
+                                                </div>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Modal de aprobacion-->
+                    <form method="post" action="aprobarevidenciat4" enctype="multipart/form-data">
+                        <div class="modal fade" id="modalAprobar<%=x%>" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 id="tituloVentana">Aprobar Actividad</h5>
+                                        <button class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="alert">
+                                            <div class="form-group">
+                                                <p>¿Aprobar actividad? <%=actividades[x].actividad_id %></p>
+                                                <p><%=actividades[x].actividad_desc %></p>
+                                                <input type="hidden" value="<%=actividades[x].actividad_id %>" name="idactividad"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-success" type="submit">
+                                            Sí
+                                        </button>
+                                        <button class="btn btn-danger" data-dismiss="modal" aria-label="Close">
+                                            No
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </form>
+
+                     <!--Modal de desaprobacion-->
+                     <form method="post" action="desaprobarevidenciat4" enctype="multipart/form-data">
+                        <div class="modal fade" id="modalDesaprobar<%=x%>" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 id="tituloVentana">Negar Actividad</h5>
+                                        <button class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="alert">
+                                            <div class="form-group">
+                                                <p>¿Marcar actividad <%=actividades[x].actividad_id %> como NO APROBADA?</p>
+                                                <p><%=actividades[x].actividad_desc %></p>
+                                                <input type="hidden" value="<%=actividades[x].actividad_id %>" name="idactividad"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-success" type="submit">
+                                            Sí
+                                        </button>
+                                        <button class="btn btn-danger" data-dismiss="modal" aria-label="Close">
+                                            No
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </form>
+                <% } %>
+            </tbody>
+               
+        </table>
+    </div>
+            
+</div>
+
+<script>
+$(document).ready(function(){
+  $("#searchBar").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#tableContent tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+
+<%- include ../../layouts/pie.ejs %>

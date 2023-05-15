@@ -1,0 +1,112 @@
+<%- include layouts/cabecera.ejs %>
+<div class="card text-black bg-transparent mb-3">
+    <div class="card-header">
+        Áreas
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+            <table class="table table-light">
+                <thead class="thead-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Área</th>
+                        <th>Responsable</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <% for( let x = 0;x < areas.length; x++) { %>
+                       
+                    <tr>
+                        <td><%=areas[x].area_id %></td>
+                        <td><%=areas[x].area_nombre %></td>
+                            <td align="right">
+                            <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                                <button class="btn btn-light" data-toggle="modal" data-target="#ventanaEdicion<%=x%>">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- MODAL DE EDICION-->
+                    <div class="modal fade" id="ventanaEdicion<%=x%>" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 id="tituloVentana">Editar Área</h5>
+                                    <button class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Área</h5>
+                                        <p class="card-text">
+                                            <form method="post" action="areas/actualizar" enctype="multipart/form-data">
+                                                <input type="hidden" name="id" value="<%=areas[x].area_id%>"/>
+                                                <div class="form-group">
+                                                    <label for="my-input">Nombre</label>
+                                                    <input id="my-input" class="form-control" type="text" name="areaname" value="<%=areas[x].area_nombre%>"/>
+                                                </div>
+                                                <button class="btn btn-light" type="submit"><img src="/images/guardar.png" width="20"></button>
+                                            </form>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <% } %>
+            
+                    
+                </tbody>
+            </table>
+        </p>
+    </div>
+
+    <
+
+
+<!--MODAL CREACION-->
+<div class="modal fade" id="ventanaCreacion" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="tituloVentana">Agregar nueva Área</h5>
+                <button class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <p class="card-text">
+                        <form method="post" action="/areas" enctype="multipart/form-data">
+                            
+                            <div class="form-group">
+                                <label for="my-input">Nombre</label>
+                                <input id="my-input" class="form-control" type="text" name="nombre"/>
+                            </div>
+            
+                            
+                            <button class="btn btn-outline-info" type="submit"><img src="/images/guardar.png" width="20"></button>
+                        </form>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+
+
+
+
+
+
+
+
+
+<%- include layouts/pie.ejs %>  

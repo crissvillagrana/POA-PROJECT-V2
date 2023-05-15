@@ -1,0 +1,100 @@
+<%- include layouts/cabecera.ejs %>
+<div class="card text-black bg-transparent mb-3">
+    <div class="card-header">Unidades</div>
+    <div class="card-body">
+        <table class="table table-light">
+            <thead class="thead-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Unidad</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <% for( let x = 0;x < unidades.length; x++) { %>
+                <tr>
+                    <td><%=unidades[x].unidad_id %></td>
+                    <td><%=unidades[x].unidad_desc %></td>
+                    <td align="right">
+                        <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                            <button class="btn btn-light" data-toggle="modal" data-target="#ventanaEdicion<%=x%>">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </div>
+                
+                        <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                            <form class="form-inline" method="post" action="/unidades/eliminar/<%=unidades[x].unidad_id %>">
+                                <button class="btn btn-light" type="submit"><i class="bi bi-trash"></i></button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- MODAL DE EDICION-->
+                <div class="modal fade" id="ventanaEdicion<%=x%>" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 id="tituloVentana">Editar unidad</h5>
+                                <button class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <form method="post" action="unidades/actualizar" enctype="multipart/form-data">
+                                            <input type="hidden" name="id" value="<%=unidades[x].unidad_id%>"/>
+                                            <div class="form-group">
+                                                <label for="txtnombre">Nombre</label>
+                                                <input id="txtnombre" value="<%=unidades[x].unidad_desc%>" class="form-control" type="text" name="nombre">
+                                            </div>
+                                            
+                                            <button class="btn btn-light" type="submit"><img src="/images/guardar.png" width="20"></button>
+                                        </form>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <% } %>
+            </tbody>
+        </table>
+        <a class="btn btn-light float-right" type="button" data-toggle="modal" data-target="#ventanaCreacion">
+            <i class="bi bi-plus-circle"></i>
+        </a>
+    </div>
+</div>
+
+<!-- MODAL DE CREACION-->
+<div class="modal fade" id="ventanaCreacion" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="tituloVentana">Agregar nueva unidad</h5>
+                <button class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <p class="card-text">
+                        <form method="post" action="/unidades" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="txtnombre">Nombre</label>
+                                <input id="txtnombre" class="form-control" type="text" name="nombre">
+                            </div>
+                            
+                            <button class="btn btn-outline-info" type="submit"><img src="/images/guardar.png" width="20"></button>
+                        </form>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+<%- include layouts/pie.ejs %>  

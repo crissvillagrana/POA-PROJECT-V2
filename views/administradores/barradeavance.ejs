@@ -1,0 +1,24 @@
+<%- include ../layouts/cabeceradmins.ejs %>
+<div class="card text-black bg-transparent mb-3">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Area</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let x = 0;x < avance.length; x++) { %>
+                        <tr>
+                            <td><a href="avance/<%=avance[x].area_id %>"><%=avance[x].area_nombre%></a></td>
+                        </tr>
+                        
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<%- include ../layouts/pie %>
