@@ -1,4 +1,11 @@
 <%- include ../layouts/cabeceradmins.ejs %>
+
+<div class="card-header">
+    <form class="d-flex" role="search">
+        <input class="form-control me-2" id="searchBarr" type="search" placeholder="Buscar..." aria-label="Search">
+    </form>   
+</div>
+
 <div class="card text-black bg-transparent mb-3">
     <div class="card-body">
         <div class="table-responsive">
@@ -8,7 +15,7 @@
                         <th>Area</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tableContent">
                     <% for(let x = 0;x < avance.length; x++) { %>
                         <tr>
                             <td><a href="avance/<%=avance[x].area_id %>"><%=avance[x].area_nombre%></a></td>
@@ -20,5 +27,15 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+      $("#searchBarr").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#tableContent tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+</script>
 
 <%- include ../layouts/pie %>
