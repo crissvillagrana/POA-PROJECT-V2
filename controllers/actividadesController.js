@@ -35,22 +35,22 @@ module.exports={
     indexarea:function(req,res){
         switch(usuario.trimestre){
             case 1:
-                actividad.leerporarea(conexion,req.params.areaid,function(err,datos){
+                actividad.leerporareat1(conexion,req.params.areaid,function(err,datos){
                     res.render('actividades/single/areat1',{title:'Avance de '+datos[0].area_nombre,actividades:datos})
                 })
                 break;
             case 2:
-                actividad.leerporarea(conexion,req.params.areaid,function(err,datos){
+                actividad.leerporareat2(conexion,req.params.areaid,function(err,datos){
                     res.render('actividades/single/areat2',{title:'Avance de '+datos[0].area_nombre,actividades:datos})
                 })
                 break;
             case 3:
-                actividad.leerporarea(conexion,req.params.areaid,function(err,datos){
+                actividad.leerporareat3(conexion,req.params.areaid,function(err,datos){
                     res.render('actividades/single/areat3',{title:'Avance de '+datos[0].area_nombre,actividades:datos})
                 })
                 break;
             case 4:
-                actividad.leerporarea(conexion,req.params.areaid,function(err,datos){
+                actividad.leerporareat4(conexion,req.params.areaid,function(err,datos){
                     res.render('actividades/single/areat4',{title:'Avance de '+datos[0].area_nombre,actividades:datos})
                 })
                 break;
