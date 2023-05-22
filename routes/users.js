@@ -29,5 +29,9 @@ router.post('/subirt1',cargar.single("archivo"),usersControllers.subirt1)
 router.post('/subirt2',cargar.single("archivo"),usersControllers.subirt2)
 router.post('/subirt3',cargar.single("archivo"),usersControllers.subirt3)
 router.post('/subirt4',cargar.single("archivo"),usersControllers.subirt4)
+router.get('/pdf1',usersControllers.descargarpdf1)
+router.get('/pdf2',usersControllers.descargarpdf2)
+router.get('/pdf3',usersControllers.descargarpdf3)
+router.get('/pdf4',usersControllers.descargarpdf4)
 
 module.exports = router;

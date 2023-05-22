@@ -1,6 +1,7 @@
 var usuario = require('../scriptsmios/datosglobales')
 var conexion=require('../config/mysqlconnection')
 var user = require('../model/users')
+const PDFDocument = require('pdfkit');
 const { fecharray } = require('../scriptsmios/datosglobales')
 
 module.exports={
@@ -96,4 +97,132 @@ module.exports={
             res.redirect('/users/userst4')
         })
     },
+    descargarpdf1:function(req,res){
+        user.contarevidenciast1(conexion,usuario.areaid,function(err,evidencias){
+            user.evidenciaspdf1(conexion,usuario.areaid,function(err,datos){
+                // Crear un nuevo documento PDF
+                const doc = new PDFDocument({font: 'Courier'});
+
+                // Configurar el encabezado del archivo PDF
+                res.setHeader('Content-Type', 'application/pdf');
+                res.setHeader('Content-Disposition', 'attachment; filename="archivo.pdf"');
+
+                // Conectar el flujo de datos del documento PDF con la respuesta HTTP
+                doc.pipe(res);
+                // Agregar contenido al documento PDF
+                doc.image('public/images/logo300x300.png', 430, 15, {fit: [100, 100], align: 'center', valign: 'center'})
+                .rect(430, 15, 100, 100).stroke();
+                doc.moveDown();
+                doc.text('Poder Judicial del Estado de Nayarit')
+                doc.text('Contraloría')
+                doc.moveDown();
+                doc.lineTo(0,72)
+                doc.moveDown();
+                doc.text('Actividades Entregadas del trimestre ENERO - MARZO:')
+                
+                for(var x=0;x<evidencias[0].Evidencias_Subidas;x++){
+                    doc.moveDown();
+                    doc.text(datos[x].actividad_desc)
+                }//end for
+                //end pdf
+                doc.end();
+            })
+        })
+    },
+    descargarpdf2:function(req,res){
+        user.contarevidenciast2(conexion,usuario.areaid,function(err,evidencias){
+            user.evidenciaspdf2(conexion,usuario.areaid,function(err,datos){
+                // Crear un nuevo documento PDF
+                const doc = new PDFDocument({font: 'Courier'});
+
+                // Configurar el encabezado del archivo PDF
+                res.setHeader('Content-Type', 'application/pdf');
+                res.setHeader('Content-Disposition', 'attachment; filename="archivo.pdf"');
+
+                // Conectar el flujo de datos del documento PDF con la respuesta HTTP
+                doc.pipe(res);
+                // Agregar contenido al documento PDF
+                doc.image('public/images/logo300x300.png', 430, 15, {fit: [100, 100], align: 'center', valign: 'center'})
+                .rect(430, 15, 100, 100).stroke();
+                doc.moveDown();
+                doc.text('Poder Judicial del Estado de Nayarit')
+                doc.text('Contraloría')
+                doc.moveDown();
+                doc.lineTo(0,72)
+                doc.moveDown();
+                doc.text('Actividades Entregadas del trimestre ABRIL - JUNIO:')
+                
+                for(var x=0;x<evidencias[0].Evidencias_Subidas;x++){
+                    doc.moveDown();
+                    doc.text(datos[x].actividad_desc)
+                }//end for
+                //end pdf
+                doc.end();
+            })
+        })
+    },
+    descargarpdf3:function(req,res){
+        user.contarevidenciast4(conexion,usuario.areaid,function(err,evidencias){
+            user.evidenciaspdf4(conexion,usuario.areaid,function(err,datos){
+                // Crear un nuevo documento PDF
+                const doc = new PDFDocument({font: 'Courier'});
+
+                // Configurar el encabezado del archivo PDF
+                res.setHeader('Content-Type', 'application/pdf');
+                res.setHeader('Content-Disposition', 'attachment; filename="archivo.pdf"');
+
+                // Conectar el flujo de datos del documento PDF con la respuesta HTTP
+                doc.pipe(res);
+                // Agregar contenido al documento PDF
+                doc.image('public/images/logo300x300.png', 430, 15, {fit: [100, 100], align: 'center', valign: 'center'})
+                .rect(430, 15, 100, 100).stroke();
+                doc.moveDown();
+                doc.text('Poder Judicial del Estado de Nayarit')
+                doc.text('Contraloría')
+                doc.moveDown();
+                doc.lineTo(0,72)
+                doc.moveDown();
+                doc.text('Actividades Entregadas del trimestre JULIO - SEPTIEMBRE:')
+                
+                for(var x=0;x<evidencias[0].Evidencias_Subidas;x++){
+                    doc.moveDown();
+                    doc.text(datos[x].actividad_desc)
+                }//end for
+                //end pdf
+                doc.end();
+            })
+        })
+    },
+    descargarpdf4:function(req,res){
+        user.contarevidenciast4(conexion,usuario.areaid,function(err,evidencias){
+            user.evidenciaspdf4(conexion,usuario.areaid,function(err,datos){
+                // Crear un nuevo documento PDF
+                const doc = new PDFDocument({font: 'Courier'});
+
+                // Configurar el encabezado del archivo PDF
+                res.setHeader('Content-Type', 'application/pdf');
+                res.setHeader('Content-Disposition', 'attachment; filename="archivo.pdf"');
+
+                // Conectar el flujo de datos del documento PDF con la respuesta HTTP
+                doc.pipe(res);
+                // Agregar contenido al documento PDF
+                doc.image('public/images/logo300x300.png', 430, 15, {fit: [100, 100], align: 'center', valign: 'center'})
+                .rect(430, 15, 100, 100).stroke();
+                doc.moveDown();
+                doc.text('Poder Judicial del Estado de Nayarit')
+                doc.text('Contraloría')
+                doc.moveDown();
+                doc.lineTo(0,72)
+                doc.moveDown();
+                doc.text('Actividades Entregadas del trimestre OCTUBRE - DICIEMBRE:')
+                
+                for(var x=0;x<evidencias[0].Evidencias_Subidas;x++){
+                    doc.moveDown();
+                    doc.text(datos[x].actividad_desc)
+                }//end for
+                //end pdf
+                doc.end();
+            })
+        })
+    }
 }

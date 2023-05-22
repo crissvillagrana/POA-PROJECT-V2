@@ -66,5 +66,29 @@ module.exports={
     avance(conexion,areaid,funcion){
         conexion.query("select count(if(actividad_completada=1,1,null)) as 'Completadas', "+
         "count(case when actividad_completada=null then 1 else 0 end) as 'Pendientes' from actividades ",[areaid],funcion)
+    },
+    contarevidenciast1(conexion,areaid,funcion){
+        conexion.query("select count(if(actividad_evt1,1,null)) as 'Evidencias_Subidas', count(*) as 'actividades_cantidad' from actividades where actividad_area = ?",[areaid],funcion)
+    },
+    contarevidenciast2(conexion,areaid,funcion){
+        conexion.query("select count(if(actividad_evt2,1,null)) as 'Evidencias_Subidas', count(*) as 'actividades_cantidad' from actividades where actividad_area = ?",[areaid],funcion)
+    },
+    contarevidenciast3(conexion,areaid,funcion){
+        conexion.query("select count(if(actividad_evt3,1,null)) as 'Evidencias_Subidas', count(*) as 'actividades_cantidad' from actividades where actividad_area = ?",[areaid],funcion)
+    },
+    contarevidenciast4(conexion,areaid,funcion){
+        conexion.query("select count(if(actividad_evt4,1,null)) as 'Evidencias_Subidas', count(*) as 'actividades_cantidad' from actividades where actividad_area = ?",[areaid],funcion)
+    },
+    evidenciaspdf1(conexion,areaid,funcion){
+        conexion.query("select actividad_desc from actividades where actividad_area = ? and actividad_evt1",[areaid],funcion)
+    },
+    evidenciaspdf2(conexion,areaid,funcion){
+        conexion.query("select actividad_desc from actividades where actividad_area = ? and actividad_evt2",[areaid],funcion)
+    },
+    evidenciaspdf3(conexion,areaid,funcion){
+        conexion.query("select actividad_desc from actividades where actividad_area = ? and actividad_evt3",[areaid],funcion)
+    },
+    evidenciaspdf4(conexion,areaid,funcion){
+        conexion.query("select actividad_desc from actividades where actividad_area = ? and actividad_evt4",[areaid],funcion)
     }
 }
