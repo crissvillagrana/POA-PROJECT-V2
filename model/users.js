@@ -80,15 +80,47 @@ module.exports={
         conexion.query("select count(if(actividad_evt4,1,null)) as 'Evidencias_Subidas', count(*) as 'actividades_cantidad' from actividades where actividad_area = ?",[areaid],funcion)
     },
     evidenciaspdf1(conexion,areaid,funcion){
-        conexion.query("select actividad_desc from actividades where actividad_area = ? and actividad_evt1",[areaid],funcion)
+        //conexion.query("select actividad_desc from actividades where actividad_area = ? and actividad_evt1",[areaid],funcion)
+        conexion.query(
+            "select actividades.actividad_id, actividades.actividad_eje, actividades.actividad_estrategia, actividades.actividad_desc, areas.area_id, areas.area_nombre, responsables.responsable_desc,"+
+            "actividades.actividad_meta, actividades.actividad_indicador, actividades.actividad_unidad,"+
+            "actividades.actividad_t1, actividades.actividad_t2, actividades.actividad_t3, actividades.actividad_t4, "+
+            "actividades.actividad_completada, actividades.actividad_evt1, " +
+            "actividades.actividad_obst1 as 'actividad_obs' "+
+            "from (actividades inner join areas on actividades.actividad_area = areas.area_id)"+
+            " inner join responsables on actividades.actividad_responsable = responsables.responsable_id where actividades.actividad_status=1 and actividades.actividad_area = ?",[areaid],funcion)
     },
     evidenciaspdf2(conexion,areaid,funcion){
-        conexion.query("select actividad_desc from actividades where actividad_area = ? and actividad_evt2",[areaid],funcion)
+        //conexion.query("select actividad_desc from actividades where actividad_area = ? and actividad_evt2",[areaid],funcion)
+        conexion.query(
+            "select actividades.actividad_id, actividades.actividad_eje, actividades.actividad_estrategia, actividades.actividad_desc, areas.area_id, areas.area_nombre, responsables.responsable_desc,"+
+            "actividades.actividad_meta, actividades.actividad_indicador, actividades.actividad_unidad,"+
+            "actividades.actividad_t1, actividades.actividad_t2, actividades.actividad_t3, actividades.actividad_t4, "+
+            "actividades.actividad_completada, actividades.actividad_evt2, " +
+            "actividades.actividad_obst2 as 'actividad_obs' "+
+            "from (actividades inner join areas on actividades.actividad_area = areas.area_id)"+
+            " inner join responsables on actividades.actividad_responsable = responsables.responsable_id where actividades.actividad_status=1 and actividades.actividad_area = ?",[areaid],funcion)
     },
     evidenciaspdf3(conexion,areaid,funcion){
-        conexion.query("select actividad_desc from actividades where actividad_area = ? and actividad_evt3",[areaid],funcion)
+        //conexion.query("select actividad_desc from actividades where actividad_area = ? and actividad_evt3",[areaid],funcion)
+        conexion.query(
+            "select actividades.actividad_id, actividades.actividad_eje, actividades.actividad_estrategia, actividades.actividad_desc, areas.area_id, areas.area_nombre, responsables.responsable_desc,"+
+            "actividades.actividad_meta, actividades.actividad_indicador, actividades.actividad_unidad,"+
+            "actividades.actividad_t1, actividades.actividad_t2, actividades.actividad_t3, actividades.actividad_t4, "+
+            "actividades.actividad_completada, actividades.actividad_evt3, " +
+            "actividades.actividad_obst3 as 'actividad_obs' "+
+            "from (actividades inner join areas on actividades.actividad_area = areas.area_id)"+
+            " inner join responsables on actividades.actividad_responsable = responsables.responsable_id where actividades.actividad_status=1 and actividades.actividad_area = ?",[areaid],funcion)
     },
     evidenciaspdf4(conexion,areaid,funcion){
-        conexion.query("select actividad_desc from actividades where actividad_area = ? and actividad_evt4",[areaid],funcion)
+        //conexion.query("select actividad_desc from actividades where actividad_area = ? and actividad_evt4",[areaid],funcion)
+        conexion.query(
+            "select actividades.actividad_id, actividades.actividad_eje, actividades.actividad_estrategia, actividades.actividad_desc, areas.area_id, areas.area_nombre, responsables.responsable_desc,"+
+            "actividades.actividad_meta, actividades.actividad_indicador, actividades.actividad_unidad,"+
+            "actividades.actividad_t1, actividades.actividad_t2, actividades.actividad_t3, actividades.actividad_t4, "+
+            "actividades.actividad_completada, actividades.actividad_evt4, " +
+            "actividades.actividad_obst4 as 'actividad_obs' "+
+            "from (actividades inner join areas on actividades.actividad_area = areas.area_id)"+
+            " inner join responsables on actividades.actividad_responsable = responsables.responsable_id where actividades.actividad_status=1 and actividades.actividad_area = ?",[areaid],funcion)
     }
 }

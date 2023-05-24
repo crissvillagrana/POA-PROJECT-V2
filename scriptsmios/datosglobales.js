@@ -4,7 +4,11 @@ const fecha = new Date()
           var day = fecha.getDate() 
           var TRI=0; 
           var bstatus1, bstatus2, bstatus3, bstatus4 = false
-          var fechastring = day.toString() + '-' + month.toString() + '-' +  year.toString()
+          if(month>10){
+            var fechastring = day.toString() + '-' + month.toString() + '-' +  year.toString()
+          }else{
+            var fechastring = day.toString() + '-0' + month.toString() + '-' +  year.toString()
+          }
           switch(month){ 
             case 1: TRI=1; break; 
             case 2: TRI=1; break; 
@@ -38,6 +42,7 @@ const usuario = {
     bbutton4: bstatus4,
     fecha: fechastring,
     trimestre : TRI,
+    year: year,
     savedata:function(username,password,areaid){
         this.username = username
         this.password = password
