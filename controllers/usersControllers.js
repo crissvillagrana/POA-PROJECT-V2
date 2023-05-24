@@ -220,8 +220,8 @@ module.exports={
         })
     },
     descargarpdf3:function(req,res){
-        user.contarevidenciast4(conexion,usuario.areaid,function(err,evidencias){
-            user.evidenciaspdf4(conexion,usuario.areaid,function(err,datos){
+        user.contarevidenciast3(conexion,usuario.areaid,function(err,evidencias){
+            user.evidenciaspdf3(conexion,usuario.areaid,function(err,datos){
                 // Crear un nuevo documento PDF
                 const doc = new PDFDocument({font: 'Times-Roman'});
 
