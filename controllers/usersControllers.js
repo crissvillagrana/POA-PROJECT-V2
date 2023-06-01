@@ -105,7 +105,7 @@ module.exports={
 
                 // Configurar el encabezado del archivo PDF
                 res.setHeader('Content-Type', 'application/pdf');
-                res.setHeader('Content-Disposition', 'attachment; filename="archivo.pdf"');
+                res.setHeader('Content-Disposition', 'attachment; filename="reporte_t1.pdf"');
 
                 // Conectar el flujo de datos del documento PDF con la respuesta HTTP
                 doc.pipe(res);
@@ -114,7 +114,7 @@ module.exports={
                 doc.image('public/images/logo300x300.png', 10, 10, {fit: [70, 70], align: 'center', valign: 'center'}).stroke();
                 doc.moveDown();
                 doc.text(usuario.fecha,550,40)
-                doc.text('Poder Judicial del Estado de Nayarit',150,40)
+                doc.text('PODER JUDICIAL DEL ESTADO DE NAYARIT',150,40)
                 doc.text('PROGRAMA OPERATIVO ANUAL '+usuario.year)
                 doc.moveDown();
                 doc.moveTo(0,90).lineTo(1200,90).stroke()
@@ -124,7 +124,8 @@ module.exports={
                 for(var x=0;x<evidencias[0].actividades_cantidad;x++){
                     if(!datos[x].actividad_evt1){
                         doc.moveDown();
-                        doc.fillColor('red').text('NO ENTREGADA    '+
+                        doc.fillColor('red').text('NO ENTREGADA',{stroke:'true'})
+                        .text(
                         datos[x].actividad_id+'    '+
                         datos[x].actividad_eje+'    '+
                         datos[x].actividad_estrategia+'    '+
@@ -133,10 +134,11 @@ module.exports={
                         datos[x].actividad_indicador+'  '+
                         datos[x].actividad_unidad+' '+
                         datos[x].actividad_t1,
-                        {align:'left'})
+                        {align:'justified'})
                     }else{
                         doc.moveDown();
-                        doc.fillColor('black').text('ENTREGADA    '+
+                        doc.fillColor('black').text('ENTREGADA',{stroke:'true'})
+                        .text(
                         datos[x].actividad_id+'    '+
                         datos[x].actividad_eje+'    '+
                         datos[x].actividad_estrategia+'    '+
@@ -145,14 +147,12 @@ module.exports={
                         datos[x].actividad_indicador+'  '+
                         datos[x].actividad_unidad+' '+
                         datos[x].actividad_t1,
-                        {align:'left'})
+                        {align:'justified'})
                     }
                 }//end for
-                doc.moveDown();doc.moveDown();doc.moveDown();doc.moveDown();doc.moveDown();doc.moveDown();
-                doc.fontSize(12)
+                doc.moveTo(0,700).lineTo(1200,700).stroke()
                 doc.fillColor('black')
-                doc.text('Area: '+datos[0].area_nombre)
-                doc.text('Responsable: '+datos[0].responsable_desc)
+                doc.text('AREA: '+datos[0].area_nombre+'    '+'RESPONSABLE: '+datos[0].responsable_desc,5,705)
                 //end pdf
                 doc.end();
             })
@@ -166,7 +166,7 @@ module.exports={
 
                 // Configurar el encabezado del archivo PDF
                 res.setHeader('Content-Type', 'application/pdf');
-                res.setHeader('Content-Disposition', 'attachment; filename="archivo.pdf"');
+                res.setHeader('Content-Disposition', 'attachment; filename="reporte_t2.pdf"');
 
                 // Conectar el flujo de datos del documento PDF con la respuesta HTTP
                 doc.pipe(res);
@@ -175,17 +175,19 @@ module.exports={
                 doc.image('public/images/logo300x300.png', 10, 10, {fit: [70, 70], align: 'center', valign: 'center'}).stroke();
                 doc.moveDown();
                 doc.text(usuario.fecha,550,40)
-                doc.text('Poder Judicial del Estado de Nayarit',150,40)
+                doc.text('PODER JUDICIAL DEL ESTADO DE NAYARIT',150,40)
                 doc.text('PROGRAMA OPERATIVO ANUAL '+usuario.year)
                 doc.moveDown();
                 doc.moveTo(0,90).lineTo(1200,90).stroke()
                 doc.text('Reporte de actividades del trimestre ABRIL - JUNIO:',30,110,{align:'left'})
+                doc.moveTo(0,130).lineTo(1200,130).stroke()
                 doc.moveDown()
                 doc.fontSize(10)
                 for(var x=0;x<evidencias[0].actividades_cantidad;x++){
                     if(!datos[x].actividad_evt2){
                         doc.moveDown();
-                        doc.fillColor('red').text('NO ENTREGADA    '+
+                        doc.fillColor('red').text('NO ENTREGADA',{stroke:'true'})
+                        .text(
                         datos[x].actividad_id+'    '+
                         datos[x].actividad_eje+'    '+
                         datos[x].actividad_estrategia+'    '+
@@ -194,10 +196,11 @@ module.exports={
                         datos[x].actividad_indicador+'  '+
                         datos[x].actividad_unidad+' '+
                         datos[x].actividad_t2,
-                        {align:'left'})
+                        {align:'justified'})
                     }else{
                         doc.moveDown();
-                        doc.fillColor('black').text('ENTREGADA    '+
+                        doc.fillColor('black').text('ENTREGADA',{stroke:'true'})
+                        .text(
                         datos[x].actividad_id+'    '+
                         datos[x].actividad_eje+'    '+
                         datos[x].actividad_estrategia+'    '+
@@ -206,14 +209,12 @@ module.exports={
                         datos[x].actividad_indicador+'  '+
                         datos[x].actividad_unidad+' '+
                         datos[x].actividad_t2,
-                        {align:'left'})
+                        {align:'justified'})
                     }
                 }//end for
-                doc.moveDown();doc.moveDown();doc.moveDown();doc.moveDown();doc.moveDown();doc.moveDown();
-                doc.fontSize(12)
+                doc.moveTo(0,700).lineTo(1200,700).stroke()
                 doc.fillColor('black')
-                doc.text('Area: '+datos[0].area_nombre)
-                doc.text('Responsable: '+datos[0].responsable_desc)
+                doc.text('AREA: '+datos[0].area_nombre+'    '+'RESPONSABLE: '+datos[0].responsable_desc,5,705)
                 //end pdf
                 doc.end();
             })
@@ -227,7 +228,7 @@ module.exports={
 
                 // Configurar el encabezado del archivo PDF
                 res.setHeader('Content-Type', 'application/pdf');
-                res.setHeader('Content-Disposition', 'attachment; filename="archivo.pdf"');
+                res.setHeader('Content-Disposition', 'attachment; filename="reporte_t3.pdf"');
 
                 // Conectar el flujo de datos del documento PDF con la respuesta HTTP
                 doc.pipe(res);
@@ -236,7 +237,7 @@ module.exports={
                 doc.image('public/images/logo300x300.png', 10, 10, {fit: [70, 70], align: 'center', valign: 'center'}).stroke();
                 doc.moveDown();
                 doc.text(usuario.fecha,550,40)
-                doc.text('Poder Judicial del Estado de Nayarit',150,40)
+                doc.text('PODER JUDICIAL DEL ESTADO DE NAYARIT',150,40)
                 doc.text('PROGRAMA OPERATIVO ANUAL '+usuario.year)
                 doc.moveDown();
                 doc.moveTo(0,90).lineTo(1200,90).stroke()
@@ -246,7 +247,8 @@ module.exports={
                 for(var x=0;x<evidencias[0].actividades_cantidad;x++){
                     if(!datos[x].actividad_evt3){
                         doc.moveDown();
-                        doc.fillColor('red').text('NO ENTREGADA    '+
+                        doc.fillColor('red').text('NO ENTREGADA',{stroke:'true'})
+                        .text(
                         datos[x].actividad_id+'    '+
                         datos[x].actividad_eje+'    '+
                         datos[x].actividad_estrategia+'    '+
@@ -255,10 +257,11 @@ module.exports={
                         datos[x].actividad_indicador+'  '+
                         datos[x].actividad_unidad+' '+
                         datos[x].actividad_t3,
-                        {align:'left'})
+                        {align:'justified'})
                     }else{
                         doc.moveDown();
-                        doc.fillColor('black').text('ENTREGADA    '+
+                        doc.fillColor('black').text('ENTREGADA',{stroke:'true'})
+                        .text(
                         datos[x].actividad_id+'    '+
                         datos[x].actividad_eje+'    '+
                         datos[x].actividad_estrategia+'    '+
@@ -267,14 +270,12 @@ module.exports={
                         datos[x].actividad_indicador+'  '+
                         datos[x].actividad_unidad+' '+
                         datos[x].actividad_t3,
-                        {align:'left'})
+                        {align:'justified'})
                     }
                 }//end for
-                doc.moveDown();doc.moveDown();doc.moveDown();doc.moveDown();doc.moveDown();doc.moveDown();
-                doc.fontSize(12)
+                doc.moveTo(0,700).lineTo(1200,700).stroke()
                 doc.fillColor('black')
-                doc.text('Area: '+datos[0].area_nombre)
-                doc.text('Responsable: '+datos[0].responsable_desc)
+                doc.text('AREA: '+datos[0].area_nombre+'    '+'RESPONSABLE: '+datos[0].responsable_desc,5,705)
                 //end pdf
                 doc.end();
             })
@@ -288,7 +289,7 @@ module.exports={
 
                 // Configurar el encabezado del archivo PDF
                 res.setHeader('Content-Type', 'application/pdf');
-                res.setHeader('Content-Disposition', 'attachment; filename="archivo.pdf"');
+                res.setHeader('Content-Disposition', 'attachment; filename="reporte_t4.pdf"');
 
                 // Conectar el flujo de datos del documento PDF con la respuesta HTTP
                 doc.pipe(res);
@@ -297,7 +298,7 @@ module.exports={
                 doc.image('public/images/logo300x300.png', 10, 10, {fit: [70, 70], align: 'center', valign: 'center'}).stroke();
                 doc.moveDown();
                 doc.text(usuario.fecha,550,40)
-                doc.text('Poder Judicial del Estado de Nayarit',150,40)
+                doc.text('PODER JUDICIAL DEL ESTADO DE NAYARIT',150,40)
                 doc.text('PROGRAMA OPERATIVO ANUAL '+usuario.year)
                 doc.moveDown();
                 doc.moveTo(0,90).lineTo(1200,90).stroke()
@@ -307,7 +308,8 @@ module.exports={
                 for(var x=0;x<evidencias[0].actividades_cantidad;x++){
                     if(!datos[x].actividad_evt4){
                         doc.moveDown();
-                        doc.fillColor('red').text('NO ENTREGADA    '+
+                        doc.fillColor('red').text('NO ENTREGADA',{stroke:'true'})
+                        .text(
                         datos[x].actividad_id+'    '+
                         datos[x].actividad_eje+'    '+
                         datos[x].actividad_estrategia+'    '+
@@ -316,10 +318,11 @@ module.exports={
                         datos[x].actividad_indicador+'  '+
                         datos[x].actividad_unidad+' '+
                         datos[x].actividad_t4,
-                        {align:'left'})
+                        {align:'justified'})
                     }else{
                         doc.moveDown();
-                        doc.fillColor('black').text('ENTREGADA    '+
+                        doc.fillColor('black').text('ENTREGADA',{stroke:'true'})
+                        .text(
                         datos[x].actividad_id+'    '+
                         datos[x].actividad_eje+'    '+
                         datos[x].actividad_estrategia+'    '+
@@ -328,14 +331,12 @@ module.exports={
                         datos[x].actividad_indicador+'  '+
                         datos[x].actividad_unidad+' '+
                         datos[x].actividad_t4,
-                        {align:'left'})
+                        {align:'justified'})
                     }
                 }//end for
-                doc.moveDown();doc.moveDown();doc.moveDown();doc.moveDown();doc.moveDown();doc.moveDown();
-                doc.fontSize(12)
+                doc.moveTo(0,700).lineTo(1200,700).stroke()
                 doc.fillColor('black')
-                doc.text('Area: '+datos[0].area_nombre)
-                doc.text('Responsable: '+datos[0].responsable_desc)
+                doc.text('AREA: '+datos[0].area_nombre+'    '+'RESPONSABLE: '+datos[0].responsable_desc,5,705)
                 //end pdf
                 doc.end();
             })

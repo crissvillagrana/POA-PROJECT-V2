@@ -18,6 +18,9 @@ module.exports={
         "inner join areas on actividades.actividad_area = areas.area_id "+
         "group by actividad_area",funcion)
     },
+    contartodo(conexion,funcion){
+        conexion.query("select count(if(actividad_completada=4,1,null)) as 'total_completadas',count(*) as 'total_actividades' from actividades",funcion)
+    },
     leerporareat1(conexion,areaid,funcion){
         conexion.query("select actividades.actividad_id, actividades.actividad_eje, actividades.actividad_estrategia, actividades.actividad_desc, areas.area_nombre, responsables.responsable_desc,"+
         "actividades.actividad_meta, actividades.actividad_indicador, actividades.actividad_unidad,"+

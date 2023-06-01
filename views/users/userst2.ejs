@@ -26,7 +26,7 @@
 
 
 <div class="card-body">
-    <table class="table table-light table-borderless table-responsive-lg">
+    <table class="table table-light table-borderless table-responsive-lg align-middle">
         <thead class="thead-light">
             <tr>
                 <th>ID</th>
@@ -44,7 +44,7 @@
         </thead>
         <tbody>
             <% for(let x=0;x < actividades.length; x++) { %>
-                <% if(actividades[x].actividad_completada==1){ %>
+                <% if(actividades[x].actividad_completada==4){ %>
                     <tr class="table-success">
                         <td><%=actividades[x].actividad_id %></td>
                         <td><%=actividades[x].actividad_eje %></td>

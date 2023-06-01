@@ -2,7 +2,31 @@
 <div class="card">
     <div class="card text-black bg-transparent mb-3">
         <div class="card-body">
-            <h6 class="card-title">Avance de actividades completadas</h6>
+            <h6 class="card-title">Avance total de la institución</h6>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Actividades Programadas</th>
+                            <th>Actividades Completadas</th>
+                            <th>Porcentaje de avance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><%= progreso[0].total_actividades %></td>
+                            <td><%= progreso[0].total_completadas %></td>
+                            <td><%= Math.round((progreso[0].total_completadas * 100)/progreso[0].total_actividades) %>%</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="card-body">
+            <h6 class="card-title">Avance de actividades por área</h6>
             <div class="table-responsive">
                 <table class="table">
                     <thead class="thead-light">
@@ -33,5 +57,8 @@
             </div>
         </div>
     </div>
+
+    
+</div>
 </div>
 <%- include ../layouts/pie %>
