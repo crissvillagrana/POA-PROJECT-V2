@@ -149,7 +149,6 @@ module.exports={
     reportes:function(req,res){
         actividad.contarActividades(conexion,function(err,datos){
             actividad.contartodo(conexion,function(err,todo){
-                console.log(todo)
                 res.render('administradores/reportes',{title:'Reporte de avance', avance:datos, progreso:todo})
             })
         })
