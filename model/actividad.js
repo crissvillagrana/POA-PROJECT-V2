@@ -21,6 +21,15 @@ module.exports={
     contartodo(conexion,funcion){
         conexion.query("select count(if(actividad_completada=4,1,null)) as 'total_completadas',count(*) as 'total_actividades' from actividades",funcion)
     },
+    contartodoaprove(conexion,funcion){
+        conexion.query("select "+
+        "count(if(actividad_ap1=1,1,null)) as 'completadas_t1', "+
+        "count(if(actividad_ap2=1,1,null)) as 'completadas_t2', "+
+        "count(if(actividad_ap3=1,1,null)) as 'completadas_t3', "+
+        "count(if(actividad_ap4=1,1,null)) as 'completadas_t4', "+
+        "count(*) as 'total_actividades' "+
+        "from actividades;",funcion)
+    },
     leerporareat1(conexion,areaid,funcion){
         conexion.query("select actividades.actividad_id, actividades.actividad_eje, actividades.actividad_estrategia, actividades.actividad_desc, areas.area_nombre, responsables.responsable_desc,"+
         "actividades.actividad_meta, actividades.actividad_indicador, actividades.actividad_unidad,"+
@@ -141,5 +150,37 @@ module.exports={
     },
     nombrearea(conexion,id,funcion){
         conexion.query("select area_nombre from areas where area_id=?",[id],funcion)
+    },
+    cuentat1(conexion,funcion){
+        conexion.query("select areas.area_id, areas.area_nombre, "+
+        "count(actividades.actividad_id) as 'actividades_registradas', "+
+        "count(if(actividades.actividad_ap1=1,1,null)) as 'actividades_aprobadas' "+
+        "from actividades "+
+        "inner join areas on actividades.actividad_area = areas.area_id "+
+        "group by actividad_area;",funcion)
+    },
+    cuentat2(conexion,funcion){
+        conexion.query("select areas.area_id, areas.area_nombre, "+
+        "count(actividades.actividad_id) as 'actividades_registradas', "+
+        "count(if(actividades.actividad_ap2=1,1,null)) as 'actividades_aprobadas' "+
+        "from actividades "+
+        "inner join areas on actividades.actividad_area = areas.area_id "+
+        "group by actividad_area;",funcion)
+    },
+    cuentat3(conexion,funcion){
+        conexion.query("select areas.area_id, areas.area_nombre, "+
+        "count(actividades.actividad_id) as 'actividades_registradas', "+
+        "count(if(actividades.actividad_ap3=1,1,null)) as 'actividades_aprobadas' "+
+        "from actividades "+
+        "inner join areas on actividades.actividad_area = areas.area_id "+
+        "group by actividad_area;",funcion)
+    },
+    cuentat4(conexion,funcion){
+        conexion.query("select areas.area_id, areas.area_nombre, "+
+        "count(actividades.actividad_id) as 'actividades_registradas', "+
+        "count(if(actividades.actividad_ap4=1,1,null)) as 'actividades_aprobadas' "+
+        "from actividades "+
+        "inner join areas on actividades.actividad_area = areas.area_id "+
+        "group by actividad_area;",funcion)
     }
 }

@@ -158,7 +158,25 @@ module.exports={
     reportes:function(req,res){
         actividad.contarActividades(conexion,function(err,datos){
             actividad.contartodo(conexion,function(err,todo){
-                res.render('administradores/reportes',{title:'Reporte de avance', avance:datos, progreso:todo})
+                actividad.cuentat1(conexion,function(err,datost1){
+                    actividad.cuentat2(conexion,function(err,datost2){
+                        actividad.cuentat3(conexion,function(err,datost3){
+                            actividad.cuentat4(conexion,function(err,datost4){
+                                actividad.contartodoaprove(conexion,function(err,todoa){
+                                    res.render('administradores/reportes',{title:'Reporte de avance', 
+                                avance:datos, 
+                                progreso:todo,
+                                progresoa:todoa,
+                                tri1:datost1,
+                                tri2:datost2,
+                                tri3:datost3,
+                                tri4:datost4
+                                })
+                            })
+                            })
+                        })
+                    })
+                })
             })
         })
     },

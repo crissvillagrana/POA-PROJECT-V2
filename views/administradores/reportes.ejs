@@ -2,21 +2,41 @@
 <div class="card">
     <div class="card text-black bg-transparent mb-3">
         <div class="card-body">
-            <h6 class="card-title">Avance total de la institución</h6>
+            <h6 class="card-title">Índice</h6>
+            <div class="list-group">
+                <a href="#tabla1" class="list-group-item list-group-item-action">Actividades aprobadas por trimestre</a>
+                <a href="#tabla2" class="list-group-item list-group-item-action">Avance total por área (anual)</a>
+                <a href="#tabla3" class="list-group-item list-group-item-action">Avance por área (Trimestre ENERO - MARZO)</a>
+                <a href="#tabla4" class="list-group-item list-group-item-action">Avance por área (Trimestre ABRIL - JUNIO)</a>
+                <a href="#tabla5" class="list-group-item list-group-item-action">Avance por área (Trimestre JULIO - SEPTIEMBRE)</a>
+                <a href="#tabla6" class="list-group-item list-group-item-action">Avance por área (Trimestre OCTUBRE-DICIEMBRE)</a>
+                <a href="#tabla7" class="list-group-item list-group-item-action">Avance total</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card text-black bg-transparent mb-3">
+        <div class="card-body">
+            <h6 class="card-title" id="tabla1">Actividades aprobadas por trimestre</h6>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table align-middle">
                     <thead class="thead-light">
                         <tr>
-                            <th>Actividades Programadas</th>
-                            <th>Actividades Completadas</th>
-                            <th>Porcentaje de avance</th>
+                            <th>ENERO - MARZO</th>
+                            <th>ABRIL - JUNIO</th>
+                            <th>JULIO - SEPTIEMBRE</th>
+                            <th>OCTUBRE - DICIEMBRE</th>
+                            <th>Actividades Registradas</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><%= progreso[0].total_actividades %></td>
-                            <td><%= progreso[0].total_completadas %></td>
-                            <td><%= Math.round((progreso[0].total_completadas * 100)/progreso[0].total_actividades) %>%</td>
+                            <td><%= progresoa[0].completadas_t1 %></td>
+                            <td><%= progresoa[0].completadas_t2 %></td>
+                            <td><%= progresoa[0].completadas_t3 %></td>
+                            <td><%= progresoa[0].completadas_t4 %></td>
+                            <td><%= progresoa[0].total_actividades %></td>
                         </tr>
                         
                     </tbody>
@@ -24,11 +44,10 @@
             </div>
         </div>
 
-
         <div class="card-body">
-            <h6 class="card-title">Avance de actividades por área</h6>
+            <h6 class="card-title" id="tabla2">Avance total por área (anual)</h6>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table align-middle">
                     <thead class="thead-light">
                         <tr>
                             <th>Area</th>
@@ -55,6 +74,146 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <h6 class="card-title" id="tabla3">Avance por área (Trimestre ENERO - MARZO)</h6>
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Area</th>
+                        <th>Aprobadas</th>
+                        <th>Registradas</th>
+                        <th>Avance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let x = 0;x < tri1.length; x++) { %>
+                        <tr>
+                            <td><%=tri1[x].area_nombre%></td>
+                            <td><%=tri1[x].actividades_aprobadas %></td>
+                            <td><%=tri1[x].actividades_registradas %></td>
+                            <td><%= Math.round((tri1[x].actividades_aprobadas * 100)/tri1[x].actividades_registradas)%> %</td>
+                            
+                        </tr>
+                    <% } %>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="card-body" id="tabla4">
+    <h6 class="card-title">Avance por área (Trimestre ABRIL - JUNIO)</h6>
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead class="thead-light">
+                <tr>
+                    <th>Area</th>
+                    <th>Aprobadas</th>
+                    <th>Registradas</th>
+                    <th>Avance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let x = 0;x < tri2.length; x++) { %>
+                    <tr>
+                        <td><%=tri2[x].area_nombre%></td>
+                        <td><%=tri2[x].actividades_aprobadas %></td>
+                        <td><%=tri2[x].actividades_registradas %></td>
+                        <td><%= Math.round((tri2[x].actividades_aprobadas * 100)/tri2[x].actividades_registradas)%> %</td>
+                        
+                    </tr>
+                <% } %>
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+<div class="card-body">
+    <h6 class="card-title" id="tabla5">Avance por área (Trimestre JULIO - SEPTIEMBRE)</h6>
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead class="thead-light">
+                <tr>
+                    <th>Area</th>
+                    <th>Aprobadas</th>
+                    <th>Registradas</th>
+                    <th>Avance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let x = 0;x < tri3.length; x++) { %>
+                    <tr>
+                        <td><%=tri3[x].area_nombre%></td>
+                        <td><%=tri3[x].actividades_aprobadas %></td>
+                        <td><%=tri3[x].actividades_registradas %></td>
+                        <td><%= Math.round((tri3[x].actividades_aprobadas * 100)/tri3[x].actividades_registradas)%> %</td>
+                        
+                    </tr>
+                <% } %>
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+<div class="card-body" id="tabla6">
+    <h6 class="card-title">Avance por área (Trimestre OCTUBRE-DICIEMBRE)</h6>
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead class="thead-light">
+                <tr>
+                    <th>Area</th>
+                    <th>Aprobadas</th>
+                    <th>Registradas</th>
+                    <th>Avance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let x = 0;x < tri4.length; x++) { %>
+                    <tr>
+                        <td><%=tri4[x].area_nombre%></td>
+                        <td><%=tri4[x].actividades_aprobadas %></td>
+                        <td><%=tri4[x].actividades_registradas %></td>
+                        <td><%= Math.round((tri4[x].actividades_aprobadas * 100)/tri4[x].actividades_registradas)%> %</td>
+                        
+                    </tr>
+                <% } %>
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+<div class="card text-black bg-transparent mb-3">
+    <div class="card-body">
+        <h6 class="card-title" id="tabla7">Avance total</h6>
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Actividades Completadas</th>
+                        <th>Actividades Programadas</th>
+                        <th>Porcentaje de avance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%= progreso[0].total_completadas %></td>
+                        <td><%= progreso[0].total_actividades %></td>
+                        <td><%= Math.round((progreso[0].total_completadas * 100)/progreso[0].total_actividades) %>%</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
         </div>
     </div>
 
