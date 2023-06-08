@@ -36,6 +36,7 @@
                     <th>Indicador</th>
                     <th>Unidad</th>
                     <th>Trimestre 2</th>
+                    <th>Total</th>
                     <th><i class="bi bi-folder"></i></th>
                     <th><i class="bi bi-chat-dots"></i></th>
                     <th>Evaluar</th>
@@ -57,6 +58,7 @@
                             
 
                             <td><%=actividades[x].actividad_t2 %></td>
+                            <td><%=actividades[x].actividad_t1 + actividades[x].actividad_t2 + actividades[x].actividad_t3 + actividades[x].actividad_t4 %></td>
                             <% if(!actividades[x].actividad_evt2){ %>
                                 <td>-</td>
                             <% } else{ %>

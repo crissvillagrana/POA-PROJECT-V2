@@ -87,23 +87,32 @@ module.exports={
         }
     },
     indexareat1:function(req,res){
-        actividad.leerporareat1(conexion,req.params.areaid,function(err,datos){
-            res.render('administradores/singularaprobacion/indexareat1',{title:'Avance de '+datos[0].area_nombre,actividades:datos})
+        actividad.nombrearea(conexion,req.params.areaid,function(err,nombre){
+            actividad.leerporareat1(conexion,req.params.areaid,function(err,datos){
+                res.render('administradores/singularaprobacion/indexareat1',{title:'Avance de '+nombre[0].area_nombre,actividades:datos})
+            })
         })
+        
     },
     indexareat2:function(req,res){
-        actividad.leerporareat2(conexion,req.params.areaid,function(err,datos){
-            res.render('administradores/singularaprobacion/indexareat2',{title:'Avance de '+datos[0].area_nombre,actividades:datos})
+        actividad.nombrearea(conexion,req.params.areaid,function(err,nombre){
+            actividad.leerporareat2(conexion,req.params.areaid,function(err,datos){
+                res.render('administradores/singularaprobacion/indexareat2',{title:'Avance de '+nombre[0].area_nombre,actividades:datos})
+            })
         })
     },
     indexareat3:function(req,res){
-        actividad.leerporareat3(conexion,req.params.areaid,function(err,datos){
-            res.render('administradores/singularaprobacion/indexareat3',{title:'Avance de '+datos[0].area_nombre,actividades:datos})
+        actividad.nombrearea(conexion,req.params.areaid,function(err,nombre){
+            actividad.leerporareat3(conexion,req.params.areaid,function(err,datos){
+            res.render('administradores/singularaprobacion/indexareat3',{title:'Avance de '+nombre[0].area_nombre,actividades:datos})
+        })
         })
     },
     indexareat4:function(req,res){
-        actividad.leerporareat4(conexion,req.params.areaid,function(err,datos){
-            res.render('administradores/singularaprobacion/indexareat4',{title:'Avance de '+datos[0].area_nombre,actividades:datos})
+        actividad.nombrearea(conexion,req.params.areaid,function(err,nombre){
+            actividad.leerporareat4(conexion,req.params.areaid,function(err,datos){
+                res.render('administradores/singularaprobacion/indexareat4',{title:'Avance de '+nombre[0].area_nombre,actividades:datos})
+            })
         })
     },
     singleae1:function(req,res){

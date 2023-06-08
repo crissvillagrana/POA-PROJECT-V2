@@ -7,7 +7,7 @@ module.exports={
             "actividades.actividad_completada, actividades.actividad_evt1, " +
             "actividades.actividad_obst1 as 'actividad_obs' "+
             "from (actividades inner join areas on actividades.actividad_area = areas.area_id)"+
-            " inner join responsables on actividades.actividad_responsable = responsables.responsable_id where actividades.actividad_status=1 and actividades.actividad_area = ?",[areaid],funcion)
+            " inner join responsables on actividades.actividad_responsable = responsables.responsable_id where actividades.actividad_status=1 and actividades.actividad_area = ? and actividad_t1!=0",[areaid],funcion)
     },
     cargart2:function(conexion,areaid,funcion){
         conexion.query(
@@ -17,7 +17,7 @@ module.exports={
             "actividades.actividad_completada, actividades.actividad_evt2, " +
             "actividades.actividad_obst2 as 'actividad_obs' "+
             "from (actividades inner join areas on actividades.actividad_area = areas.area_id)"+
-            " inner join responsables on actividades.actividad_responsable = responsables.responsable_id where actividades.actividad_status=1 and actividades.actividad_area = ?",[areaid],funcion)
+            " inner join responsables on actividades.actividad_responsable = responsables.responsable_id where actividades.actividad_status=1 and actividades.actividad_area = ? and actividad_t2!=0",[areaid],funcion)
     },
     cargart3:function(conexion,areaid,funcion){
         conexion.query(
@@ -27,7 +27,7 @@ module.exports={
             "actividades.actividad_completada, actividades.actividad_evt3, " +
             "actividades.actividad_obst3 as 'actividad_obs' "+
             "from (actividades inner join areas on actividades.actividad_area = areas.area_id)"+
-            " inner join responsables on actividades.actividad_responsable = responsables.responsable_id where actividades.actividad_status=1 and actividades.actividad_area = ?",[areaid],funcion)
+            " inner join responsables on actividades.actividad_responsable = responsables.responsable_id where actividades.actividad_status=1 and actividades.actividad_area = ? and actividad_t3!=0",[areaid],funcion)
     },
     cargart4:function(conexion,areaid,funcion){
         conexion.query(
@@ -37,7 +37,7 @@ module.exports={
             "actividades.actividad_completada, actividades.actividad_evt4, " +
             "actividades.actividad_obst4 as 'actividad_obs' "+
             "from (actividades inner join areas on actividades.actividad_area = areas.area_id)"+
-            " inner join responsables on actividades.actividad_responsable = responsables.responsable_id where actividades.actividad_status=1 and actividades.actividad_area = ?",[areaid],funcion)
+            " inner join responsables on actividades.actividad_responsable = responsables.responsable_id where actividades.actividad_status=1 and actividades.actividad_area = ? and actividad_t4!=0",[areaid],funcion)
     },
     uploadt1(conexion,id,archivo,funcion){
         conexion.query("update actividades set actividad_evt1=? where actividad_id=?",[archivo.filename,id],funcion)

@@ -614,6 +614,21 @@ actividad_t1,actividad_t2,actividad_t3,actividad_t4) values
 select * from actividades;
 update actividades set actividad_status=1,actividad_completada=0, actividad_ap1=0,actividad_ap2=0,actividad_ap3=0,actividad_ap4=0;
 
+update actividades set actividad_completada = 0;
+update actividades set actividad_ap1 = 0, actividad_ap2=0, actividad_ap3=0, actividad_ap4=0;
+
+
+update actividades set actividad_ap1 = 1 where actividad_t1 = 0;
+update actividades set actividad_ap2 = 1 where actividad_t2 = 0;
+update actividades set actividad_ap3 = 1 where actividad_t3 = 0;
+update actividades set actividad_ap4 = 1 where actividad_t4 = 0;
+
+
+update actividades set actividad_completada = actividad_completada +1 where actividad_ap1 = 1;
+update actividades set actividad_completada = actividad_completada +1 where actividad_ap2 = 1;
+update actividades set actividad_completada = actividad_completada +1 where actividad_ap3 = 1;
+update actividades set actividad_completada = actividad_completada +1 where actividad_ap4 = 1;
+
 
 
 
