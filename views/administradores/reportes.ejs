@@ -5,12 +5,12 @@
             <h6 class="card-title">Índice</h6>
             <div class="list-group">
                 <a href="#tabla1" class="list-group-item list-group-item-action">Actividades aprobadas por trimestre</a>
-                <a href="#tabla2" class="list-group-item list-group-item-action">Avance total por área (anual)</a>
                 <a href="#tabla3" class="list-group-item list-group-item-action">Avance por área (Trimestre ENERO - MARZO)</a>
                 <a href="#tabla4" class="list-group-item list-group-item-action">Avance por área (Trimestre ABRIL - JUNIO)</a>
                 <a href="#tabla5" class="list-group-item list-group-item-action">Avance por área (Trimestre JULIO - SEPTIEMBRE)</a>
                 <a href="#tabla6" class="list-group-item list-group-item-action">Avance por área (Trimestre OCTUBRE-DICIEMBRE)</a>
                 <a href="#tabla7" class="list-group-item list-group-item-action">Avance total</a>
+                <a href="#tabla2" class="list-group-item list-group-item-action">Avance total por área (anual)</a>
             </div>
         </div>
     </div>
@@ -44,38 +44,7 @@
             </div>
         </div>
 
-        <div class="card-body">
-            <h6 class="card-title" id="tabla2">Avance total por área (anual)</h6>
-            <div class="table-responsive">
-                <table class="table align-middle">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Area</th>
-                            <th>Completadas</th>
-                            <th>Pendientes</th>
-                            <th>Total</th>
-                            <th>Avance</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% for(let x = 0;x < avance.length; x++) { %>
-                            <tr>
-                                <td><%=avance[x].area_nombre%></td>
-                                <td><%=avance[x].actividades_completadas %></td>
-                                <td><%=avance[x].actividades_registradas - avance[x].actividades_completadas %></td>
-                                <td><%=avance[x].actividades_registradas %></td>
-                                <td>
-                                    <%= Math.round((avance[x].actividades_completadas * 100)/avance[x].actividades_registradas) %>%
-                                </td>
-                                
-                            </tr>
-                        <% } %>
-                        
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+        
 
     <div class="card-body">
         <h6 class="card-title" id="tabla3">Avance por área (Trimestre ENERO - MARZO)</h6>
@@ -217,7 +186,38 @@
         </div>
     </div>
 
-    
+    <div class="card-body">
+        <h6 class="card-title" id="tabla2">Avance total por área (anual)</h6>
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Area</th>
+                        <th>Completadas</th>
+                        <th>Pendientes</th>
+                        <th>Total</th>
+                        <th>Avance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let x = 0;x < avance.length; x++) { %>
+                        <tr>
+                            <td><%=avance[x].area_nombre%></td>
+                            <td><%=avance[x].actividades_completadas %></td>
+                            <td><%=avance[x].actividades_registradas - avance[x].actividades_completadas %></td>
+                            <td><%=avance[x].actividades_registradas %></td>
+                            <td>
+                                <%= Math.round((avance[x].actividades_completadas * 100)/avance[x].actividades_registradas) %>%
+                            </td>
+                            
+                        </tr>
+                    <% } %>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </div>
 </div>
 <%- include ../layouts/pie %>
