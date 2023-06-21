@@ -1,6 +1,7 @@
 var conexion=require('../config/mysqlconnection');
 var actividad=require('../model/actividad');
 const usuario = require('../scriptsmios/datosglobales')
+const ExcelJS = require('exceljs');
 module.exports={
     aprovet1:function(req,res){
         actividad.aprovet1(conexion,function(err,datos){
@@ -182,5 +183,248 @@ module.exports={
     },
     indexplan:function(req,res){
         res.render('planeacion/interfaz',{title:'TSJPOA'})
+    },
+    xltabla1:function(req,res){
+        actividad.contartodoaprove(conexion,function(err,datos){
+            // Crear un nuevo libro de Excel
+            const workbook = new ExcelJS.Workbook();
+            const worksheet = workbook.addWorksheet('Datos');
+
+            // Agregar datos a las celdas
+            worksheet.getCell('A1').value = 'Enero - Marzo';
+            worksheet.getCell('B1').value = 'Abril - Junio';
+            worksheet.getCell('C1').value = 'Julio - Septiembre';
+            worksheet.getCell('D1').value = 'Octubre - Diciembre';
+            worksheet.getCell('E1').value = 'Actividades Registradas';
+
+            worksheet.getCell('A2').value = datos[0].completadas_t1;
+            worksheet.getCell('B2').value = datos[0].completadas_t2;
+            worksheet.getCell('C2').value = datos[0].completadas_t3;
+            worksheet.getCell('D2').value = datos[0].completadas_t4;
+            worksheet.getCell('E2').value = datos[0].total_actividades;
+
+            // Configurar el tipo de contenido de la respuesta
+            res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            res.setHeader('Content-Disposition', 'attachment; filename="aprobacion_trimestral.xlsx"');
+
+            // Escribir el libro de Excel en la respuesta
+            workbook.xlsx.write(res)
+            .then(() => {
+                // Finalizar la respuesta
+                res.end();
+            })
+            .catch((error) => {
+                console.log('Error al generar el archivo Excel:', error);
+                res.status(500).send('Error al generar el archivo Excel');
+            });
+        })
+    },
+    xltabla2:function(req,res){
+        actividad.cuentat1(conexion,function(err,tri1){
+            // Crear un nuevo libro de Excel
+            const workbook = new ExcelJS.Workbook();
+            const worksheet = workbook.addWorksheet('Datos');
+
+            // Agregar datos a las celdas
+            worksheet.getCell('A1').value = 'Area';
+            worksheet.getCell('B1').value = 'Arobadas';
+            worksheet.getCell('C1').value = 'Registradas';
+            worksheet.getCell('D1').value = 'Avance';
+
+            for(let x=0; x<tri1.length; x++) {
+                worksheet.getCell('A'+(x+2)).value = tri1[x].area_nombre;
+                worksheet.getCell('B'+(x+2)).value = tri1[x].actividades_aprobadas;
+                worksheet.getCell('C'+(x+2)).value = tri1[x].actividades_registradas;
+                worksheet.getCell('D'+(x+2)).value = Math.round((tri1[x].actividades_aprobadas * 100)/tri1[x].actividades_registradas)+'%';
+            }
+
+            // Configurar el tipo de contenido de la respuesta
+            res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            res.setHeader('Content-Disposition', 'attachment; filename="avance_trimestral_ene-mar.xlsx"');
+
+            // Escribir el libro de Excel en la respuesta
+            workbook.xlsx.write(res)
+            .then(() => {
+                // Finalizar la respuesta
+                res.end();
+            })
+            .catch((error) => {
+                console.log('Error al generar el archivo Excel:', error);
+                res.status(500).send('Error al generar el archivo Excel');
+            });
+        })
+    },
+    xltabla3:function(req,res){
+        actividad.cuentat2(conexion,function(err,tri2){
+             // Crear un nuevo libro de Excel
+             const workbook = new ExcelJS.Workbook();
+             const worksheet = workbook.addWorksheet('Datos');
+ 
+             // Agregar datos a las celdas
+             worksheet.getCell('A1').value = 'Area';
+             worksheet.getCell('B1').value = 'Arobadas';
+             worksheet.getCell('C1').value = 'Registradas';
+             worksheet.getCell('D1').value = 'Avance';
+ 
+             for(let x=0; x<tri2.length; x++) {
+                 worksheet.getCell('A'+(x+2)).value = tri2[x].area_nombre;
+                 worksheet.getCell('B'+(x+2)).value = tri2[x].actividades_aprobadas;
+                 worksheet.getCell('C'+(x+2)).value = tri2[x].actividades_registradas;
+                 worksheet.getCell('D'+(x+2)).value = Math.round((tri2[x].actividades_aprobadas * 100)/tri2[x].actividades_registradas)+'%';
+             }
+ 
+             // Configurar el tipo de contenido de la respuesta
+             res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+             res.setHeader('Content-Disposition', 'attachment; filename="avance_trimestral_abr-jun.xlsx"');
+ 
+             // Escribir el libro de Excel en la respuesta
+             workbook.xlsx.write(res)
+             .then(() => {
+                 // Finalizar la respuesta
+                 res.end();
+             })
+             .catch((error) => {
+                 console.log('Error al generar el archivo Excel:', error);
+                 res.status(500).send('Error al generar el archivo Excel');
+             });
+        })
+    },
+    xltabla4:function(req,res){
+        actividad.cuentat3(conexion,function(err,tri3){
+             // Crear un nuevo libro de Excel
+             const workbook = new ExcelJS.Workbook();
+             const worksheet = workbook.addWorksheet('Datos');
+ 
+             // Agregar datos a las celdas
+             worksheet.getCell('A1').value = 'Area';
+             worksheet.getCell('B1').value = 'Arobadas';
+             worksheet.getCell('C1').value = 'Registradas';
+             worksheet.getCell('D1').value = 'Avance';
+ 
+             for(let x=0; x<tri3.length; x++) {
+                 worksheet.getCell('A'+(x+2)).value = tri3[x].area_nombre;
+                 worksheet.getCell('B'+(x+2)).value = tri3[x].actividades_aprobadas;
+                 worksheet.getCell('C'+(x+2)).value = tri3[x].actividades_registradas;
+                 worksheet.getCell('D'+(x+2)).value = Math.round((tri3[x].actividades_aprobadas * 100)/tri3[x].actividades_registradas)+'%';
+             }
+ 
+             // Configurar el tipo de contenido de la respuesta
+             res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+             res.setHeader('Content-Disposition', 'attachment; filename="avance_trimestral_jul-sep.xlsx"');
+ 
+             // Escribir el libro de Excel en la respuesta
+             workbook.xlsx.write(res)
+             .then(() => {
+                 // Finalizar la respuesta
+                 res.end();
+             })
+             .catch((error) => {
+                 console.log('Error al generar el archivo Excel:', error);
+                 res.status(500).send('Error al generar el archivo Excel');
+             });
+        })
+    },
+    xltabla5:function(req,res){
+        actividad.cuentat4(conexion,function(err,tri4){
+            // Crear un nuevo libro de Excel
+            const workbook = new ExcelJS.Workbook();
+            const worksheet = workbook.addWorksheet('Datos');
+
+            // Agregar datos a las celdas
+            worksheet.getCell('A1').value = 'Area';
+            worksheet.getCell('B1').value = 'Arobadas';
+            worksheet.getCell('C1').value = 'Registradas';
+            worksheet.getCell('D1').value = 'Avance';
+
+            for(let x=0; x<tri4.length; x++) {
+                worksheet.getCell('A'+(x+2)).value = tri4[x].area_nombre;
+                worksheet.getCell('B'+(x+2)).value = tri4[x].actividades_aprobadas;
+                worksheet.getCell('C'+(x+2)).value = tri4[x].actividades_registradas;
+                worksheet.getCell('D'+(x+2)).value = Math.round((tri4[x].actividades_aprobadas * 100)/tri4[x].actividades_registradas)+'%';
+            }
+
+            // Configurar el tipo de contenido de la respuesta
+            res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            res.setHeader('Content-Disposition', 'attachment; filename="avance_trimestral_oct-dic.xlsx"');
+
+            // Escribir el libro de Excel en la respuesta
+            workbook.xlsx.write(res)
+            .then(() => {
+                // Finalizar la respuesta
+                res.end();
+            })
+            .catch((error) => {
+                console.log('Error al generar el archivo Excel:', error);
+                res.status(500).send('Error al generar el archivo Excel');
+            });
+        })
+    },
+    xltabla6:function(req,res){
+        actividad.contartodo(conexion,function(err,progreso){
+            // Crear un nuevo libro de Excel
+            const workbook = new ExcelJS.Workbook();
+            const worksheet = workbook.addWorksheet('Datos');
+
+            // Agregar datos a las celdas
+            worksheet.getCell('A1').value = 'Actividades Completadas';
+            worksheet.getCell('B1').value = 'Actividades Programadas';
+            worksheet.getCell('C1').value = 'Porcentaje de avance';
+
+            worksheet.getCell('A2').value = progreso[0].total_completadas;
+            worksheet.getCell('B2').value = progreso[0].total_actividades;
+            worksheet.getCell('C2').value = Math.round((progreso[0].total_completadas * 100)/progreso[0].total_actividades)
+
+            // Configurar el tipo de contenido de la respuesta
+            res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            res.setHeader('Content-Disposition', 'attachment; filename="avance_total.xlsx"');
+
+            // Escribir el libro de Excel en la respuesta
+            workbook.xlsx.write(res)
+            .then(() => {
+                // Finalizar la respuesta
+                res.end();
+            })
+            .catch((error) => {
+                console.log('Error al generar el archivo Excel:', error);
+                res.status(500).send('Error al generar el archivo Excel');
+            });
+        })
+    },
+    xltabla7:function(req,res){
+        actividad.contarActividades(conexion,function(err,avance){
+            // Crear un nuevo libro de Excel
+            const workbook = new ExcelJS.Workbook();
+            const worksheet = workbook.addWorksheet('Datos');
+
+            // Agregar datos a las celdas
+            worksheet.getCell('A1').value = 'Area';
+            worksheet.getCell('B1').value = 'Completadas';
+            worksheet.getCell('C1').value = 'Pendientes';
+            worksheet.getCell('D1').value = 'Total';
+            worksheet.getCell('E1').value = 'Avance';
+
+            for(let x=0; x<avance.length; x++) {
+                worksheet.getCell('A'+(x+2)).value = avance[x].area_nombre;
+                worksheet.getCell('B'+(x+2)).value = avance[x].actividades_completadas;
+                worksheet.getCell('C'+(x+2)).value = avance[x].actividades_registradas - avance[x].actividades_completadas;
+                worksheet.getCell('D'+(x+2)).value = avance[x].actividades_registradas;
+                worksheet.getCell('E'+(x+2)).value = Math.round((avance[x].actividades_completadas * 100)/avance[x].actividades_registradas)+'%'
+            }
+
+            // Configurar el tipo de contenido de la respuesta
+            res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            res.setHeader('Content-Disposition', 'attachment; filename="avance_total_por_area.xlsx"');
+
+            // Escribir el libro de Excel en la respuesta
+            workbook.xlsx.write(res)
+            .then(() => {
+                // Finalizar la respuesta
+                res.end();
+            })
+            .catch((error) => {
+                console.log('Error al generar el archivo Excel:', error);
+                res.status(500).send('Error al generar el archivo Excel');
+            });
+        })
     }
 }

@@ -53,5 +53,13 @@ router.post('/desaprobarevidenciat1',cargar.single('otro'),administradoresContro
 router.post('/desaprobarevidenciat2',cargar.single('otro'),administradoresController.desaprobarevidenciat2)
 router.post('/desaprobarevidenciat3',cargar.single('otro'),administradoresController.desaprobarevidenciat3)
 router.post('/desaprobarevidenciat4',cargar.single('otro'),administradoresController.desaprobarevidenciat4)
+//pdfs
+router.get('/tabla1',administradoresController.xltabla1)
+router.get('/tabla2',administradoresController.xltabla2)
+router.get('/tabla3',administradoresController.xltabla3)
+router.get('/tabla4',administradoresController.xltabla4)
+router.get('/tabla5',administradoresController.xltabla5)
+router.get('/tabla6',administradoresController.xltabla6)
+router.get('/tabla7',administradoresController.xltabla7)
 
 module.exports = router;
