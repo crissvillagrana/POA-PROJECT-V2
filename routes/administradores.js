@@ -53,6 +53,8 @@ router.post('/desaprobarevidenciat1',cargar.single('otro'),administradoresContro
 router.post('/desaprobarevidenciat2',cargar.single('otro'),administradoresController.desaprobarevidenciat2)
 router.post('/desaprobarevidenciat3',cargar.single('otro'),administradoresController.desaprobarevidenciat3)
 router.post('/desaprobarevidenciat4',cargar.single('otro'),administradoresController.desaprobarevidenciat4)
+
+router.post('/cambiocontra',cargar.single("otro"),administradoresController.cambiocontra)
 //pdfs
 router.get('/tabla1',administradoresController.xltabla1)
 router.get('/tabla2',administradoresController.xltabla2)

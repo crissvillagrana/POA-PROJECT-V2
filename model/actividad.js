@@ -182,5 +182,8 @@ module.exports={
         "from actividades "+
         "inner join areas on actividades.actividad_area = areas.area_id "+
         "group by actividad_area;",funcion)
+    },
+    cambiarcontra(conexion,username,password,funcion){
+        conexion.query("update responsables set responsable_contra=? where responsable_usuario = ?",[password,username],funcion)
     }
 }

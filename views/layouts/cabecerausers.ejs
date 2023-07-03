@@ -30,9 +30,45 @@
         
       </p>
       <form class="d-flex">
+        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#modalContra"
+        href="/cambiarcontra"><i class="bi bi-person-fill-gear"></i></button>
         <a class="btn btn-outline-dark" href="/login">Cerrar Sesión</a>
       </form>
     </div>
   </nav>
 
- 
+
+  <!--Modal cambio de contraseña-->
+  <div class="modal fade" id="modalContra" tabindex="-1" role="dialog" aria-laberlledby="tituloVentana" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="tituloVentana">Cambiar contraseña</h5>
+                <button class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <p class="card-text">
+                        <form method="post" action="/users/cambiocontra" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="txtcontra" class="form-label">Ingrese la nueva contraseña</label>
+                                <input class="form-control" type="password" id="txtcontra" name="contra" required></input>
+                            </div>
+                            <div class="modal-body">
+                              <div class="alert">
+                                  <div class="form-group">
+                                      <p>El cambio de la contraseña se efectuará en cuanto presione el botón de guardar. Proceda con precaución.</p>
+                                  </div>
+                              </div>
+                          </div>
+                            <input type="hidden" name="username" value="<%=usuario.username%>"/>
+                            <button class="btn btn-outline-info" type="submit"><img src="/images/guardar.png" width="20"></button>
+                        </form>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

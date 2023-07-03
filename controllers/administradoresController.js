@@ -426,5 +426,10 @@ module.exports={
                 res.status(500).send('Error al generar el archivo Excel');
             });
         })
+    },
+    cambiocontra:function(req,res){
+        actividad.cambiarcontra(conexion,usuario.username,req.body.contra,function(err){
+            res.redirect('/administradores/aprobar/avance');
+        })
     }
 }

@@ -122,5 +122,8 @@ module.exports={
             "actividades.actividad_obst4 as 'actividad_obs' "+
             "from (actividades inner join areas on actividades.actividad_area = areas.area_id)"+
             " inner join responsables on actividades.actividad_responsable = responsables.responsable_id where actividades.actividad_status=1 and actividades.actividad_area = ?",[areaid],funcion)
+    },
+    cambiarcontra(conexion,username,password,funcion){
+        conexion.query("update responsables set responsable_contra=? where responsable_usuario = ?",[password,username],funcion)
     }
 }

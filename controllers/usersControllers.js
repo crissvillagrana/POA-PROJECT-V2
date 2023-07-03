@@ -341,5 +341,15 @@ module.exports={
                 doc.end();
             })
         })
+    },
+    cambiocontra:function(req,res){
+        user.cambiarcontra(conexion,usuario.username,req.body.contra,function(err){
+            switch(usuario.trimestre){
+                case 1: res.redirect('/users/userst1'); break;
+                case 2: res.redirect('/users/userst2'); break;
+                case 3: res.redirect('/users/userst3'); break;
+                case 4: res.redirect('/users/userst4'); break;
+            }
+        })
     }
 }

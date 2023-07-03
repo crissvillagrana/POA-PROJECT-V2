@@ -21,6 +21,7 @@ router.get('/userst1',usersControllers.cargart1);
 router.get('/userst2',usersControllers.cargart2);
 router.get('/userst3',usersControllers.cargart3);
 router.get('/userst4',usersControllers.cargart4);
+router.post('/cambiocontra',cargar.single("otro"),usersControllers.cambiocontra)
 router.post('/observacionest1',cargar.single("otro"),usersControllers.observacionest1)
 router.post('/observacionest2',cargar.single("otro"),usersControllers.observacionest2)
 router.post('/observacionest3',cargar.single("otro"),usersControllers.observacionest3)
