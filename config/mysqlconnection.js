@@ -3,7 +3,7 @@ var con= mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password:'Leviathansama28',
-    database:'tsjpoadbdemo'
+    database:'tsjpoadb'
 }
 ); //parametros de conexion
 con.connect(

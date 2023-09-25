@@ -1,0 +1,4 @@
+npm
+npm install express -g
+npm install express-generator (este es para que express genere la estructura del proyecto).
+npm install nodemon -g
