@@ -2,7 +2,7 @@ var mysql= require("mysql"); //variable de conexion mysql
 var con= mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password:'Leviathansama28',
+    password:'Leviathansama28.',
     database:'tsjpoadb'
 }
 ); //parametros de conexion
