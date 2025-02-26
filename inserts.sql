@@ -612,23 +612,22 @@ actividad_t1,actividad_t2,actividad_t3,actividad_t4) values
 (2,'2.3','RESOLVER CONTROVERSIAS EN SEGUNDA INSTANCIA, EN LOS TÉRMINOS QUE ESTABLECE LA LEY',81,84,'EMITIR RESOLUCIONES EN SEGUNDA INSTANCIA','INFORME TRIMESTRAL SALA',' SENTENCIAS',31,31,31,31),
 (2,'2.3','ACUERDOS GENERADOS DE PROMOCIONES ',81,84,'EMITIR ACUERDOS EN SEGUNDA INSTANCIA','INFORME TRMESTRAL SALA','ACUERDOS DE DEMANDAS, INCOMPETENCIAS Y APELACIONES',200,200,200,200);
 select * from actividades;
-update actividades set actividad_status=1,actividad_completada=0, actividad_ap1=0,actividad_ap2=0,actividad_ap3=0,actividad_ap4=0;
+update actividades set actividad_status=1,actividad_completada=0, actividad_ap1=0,actividad_ap2=0,actividad_ap3=0,actividad_ap4=0 where actividad_id!=0;
 
-update actividades set actividad_completada = 0;
-update actividades set actividad_ap1 = 0, actividad_ap2=0, actividad_ap3=0, actividad_ap4=0;
-
-
-update actividades set actividad_ap1 = 1 where actividad_t1 = 0;
-update actividades set actividad_ap2 = 1 where actividad_t2 = 0;
-update actividades set actividad_ap3 = 1 where actividad_t3 = 0;
-update actividades set actividad_ap4 = 1 where actividad_t4 = 0;
+update actividades set actividad_completada = 0 where actividad_id!=0;
+update actividades set actividad_ap1 = 0, actividad_ap2=0, actividad_ap3=0, actividad_ap4=0 where actividad_id!=0;
 
 
-update actividades set actividad_completada = actividad_completada +1 where actividad_ap1 = 1;
-update actividades set actividad_completada = actividad_completada +1 where actividad_ap2 = 1;
-update actividades set actividad_completada = actividad_completada +1 where actividad_ap3 = 1;
-update actividades set actividad_completada = actividad_completada +1 where actividad_ap4 = 1;
+update actividades set actividad_ap1 = 1 where actividad_t1 = 0 and actividad_id!=0;
+update actividades set actividad_ap2 = 1 where actividad_t2 = 0 and actividad_id!=0;
+update actividades set actividad_ap3 = 1 where actividad_t3 = 0 and actividad_id!=0;
+update actividades set actividad_ap4 = 1 where actividad_t4 = 0 and actividad_id!=0;
 
+
+update actividades set actividad_completada = actividad_completada +1 where actividad_ap1 = 1 and actividad_id!=0;
+update actividades set actividad_completada = actividad_completada +1 where actividad_ap2 = 1 and actividad_id!=0;
+update actividades set actividad_completada = actividad_completada +1 where actividad_ap3 = 1 and actividad_id!=0;
+update actividades set actividad_completada = actividad_completada +1 where actividad_ap4 = 1 and actividad_id!=0;
 
 
 
